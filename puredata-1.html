@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>PureData (1)</title>
+		<meta name="description" content="Ontem fiz uma pequena improvisação com o PD, mas não salvei o patch. Vou enviar por códigos. Primeiro um pequeno sintetizador, de onda quadrada variável, com...">
+		<link rel="stylesheet" href="https://jahpd.github.io/diarios//style.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'>
+		<link rel="canonical" href="https://jahpd.github.io/diarios//puredata-1.html">
+		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io/diarios//feed.xml">
+		<link rel="shortcut icon" href="https://jahpd.github.io/diarios//favicon.ico">
+		<link rel="apple-touch-icon" href="https://jahpd.github.io/diarios//apple-touch-icon.png">
+	</head>
+	<body>
+		<header class="site-header">
+		
+			<h1>
+				<a class="site-title" href="/" title="Diarios improvisados" rel="home">Diarios improvisados</a>
+			</h1>
+		
+		</header>
+		<div class="content" role="main">
+			<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<time class="post-date" datetime="2016-01-29T12:44:37-02:00">Jan 29, 2016</time>
+		<h1 class="post-title">PureData (1)</h1>
+	</header>
+	<p>Ontem fiz uma pequena improvisação com o PD, mas não salvei o <em>patch</em>. Vou enviar por códigos. Primeiro um pequeno sintetizador, de onda quadrada variável, com um envelope ADSR. A idéia era improvisar um patch com temas do cânone barroco, clássico, romântico, de memória (ou usando uma partitura se quiser)</p>
+
+<p>Depois, jogar uma rede de <em>delays</em> e transformar o  mais devagar possível.</p>
+
+<p>Por ultimo, abrir um outro patch, que capture o que está sendo tocado pelo laptop, e fazendo outra rede de delays.</p>
+
+<figure class="highlight"><pre><code class="language-javscript" data-lang="javscript">#N canvas 1 50 638 749 10;
+#X obj 42 131 mtof;
+#X obj 207 154 line;
+#X obj 42 158 osc~ 440;
+#X obj 92 215 metro 50;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array wave 100 float 1;
+#A 0 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102 -0.181102;
+#X coords 0 1 99 -1 200 140 1 0 0;
+#X restore 239 265 graph;
+#X text 217 68 Attack;
+#X text 284 97 Decay;
+#X text 449 120 Release;
+#X text 349 56 Sustain;
+#X obj 283 121 delay;
+#X obj 394 120 delay;
+#X obj 421 78 expr 1-$f1;
+#X obj 310 60 t f f;
+#X obj 313 10 hsl 128 15 30 1000 0 0 empty empty empty -2 -8 0 10 -262144 -1 -1 4300 1;
+#X floatatom 447 10 5 0 0 0 - - -;
+#X obj 283 153 pack 1 0.75 f;
+#X obj 394 152 pack 0.75 0 f;
+#X obj 41 292 *~;
+#X obj 179 213 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1 1;
+#X msg 43 18 60;
+#X obj 92 244 tabwrite~ wave;
+#X obj 244 207 hsl 128 15 -1 1 0 0 empty empty empty -2 -8 0 10 -262144 -1 -1 12300 1;
+#X obj 41 181 expr~ (-0.5+($v1&gt;$f2))*$f3;
+#X obj 245 231 hsl 128 15 -2 2 0 0 empty empty empty -2 -8 0 10 -262144 -1 -1 7500 1;
+#X obj 92 290 tabwrite~ out;
+#X obj 50 71 t f b;
+#X obj 207 50 t b b;
+#X floatatom 249 172 5 0 0 0 - - -;
+#X msg 206 119 \$1 \, \$2 \$3;
+#X obj 100 325 dac~;
+#X obj 310 30 expr 1-$f1*0.618 \;;
+#X obj 207 86 pack 0 1 10;
+#X connect 0 0 2 0;
+#X connect 1 0 17 1;
+#X connect 1 0 27 0;
+#X connect 2 0 22 0;
+#X connect 3 0 20 0;
+#X connect 3 0 24 0;
+#X connect 9 0 10 0;
+#X connect 9 0 15 0;
+#X connect 10 0 16 0;
+#X connect 11 0 10 1;
+#X connect 11 0 16 2;
+#X connect 12 0 9 1;
+#X connect 12 0 15 2;
+#X connect 12 1 11 0;
+#X connect 13 0 14 0;
+#X connect 13 0 30 0;
+#X connect 15 0 28 0;
+#X connect 16 0 28 0;
+#X connect 17 0 24 0;
+#X connect 17 0 29 0;
+#X connect 18 0 3 0;
+#X connect 19 0 25 0;
+#X connect 21 0 22 1;
+#X connect 22 0 17 0;
+#X connect 22 0 20 0;
+#X connect 23 0 22 2;
+#X connect 25 0 0 0;
+#X connect 25 1 26 0;
+#X connect 26 0 31 0;
+#X connect 26 1 9 0;
+#X connect 28 0 1 0;
+#X connect 30 0 12 0;
+#X connect 31 0 28 0;</code></pre></figure>
+
+
+</article>
+<a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
+
+		</div>
+		
+		<footer class="site-footer">
+			<small class="copyright">Theme by: oneohthree (some modifications by jahpd)</small>
+		</footer>
+		<script>
+			document.body.onscroll = function() {
+				var e = document.getElementById('go-top');
+				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
+					e.style.right = '.5em';
+				}
+				else e.style.right = '-1em';
+			}
+			var timeOut;
+			function scrollToTop() {
+				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
+					window.scrollBy(0,-50);
+					timeOut=setTimeout('scrollToTop()',5);
+				}
+				else clearTimeout(timeOut);
+			}
+		</script>
+	</body>
+</html>

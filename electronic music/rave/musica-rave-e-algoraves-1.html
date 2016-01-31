@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Musica Rave, Algoraves e raspagem de dados (1)</title>
+		<meta name="description" content="Dei um pulo no facebook e o feed do Carlos Palombini apareceu com uma coisa interessante: o guia de música eletronica de Ishkur. Fazia um tempo que pesquisav...">
+		<link rel="stylesheet" href="https://jahpd.github.io/diarios//style.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'>
+		<link rel="canonical" href="https://jahpd.github.io/diarios//electronic%20music/rave/musica-rave-e-algoraves-1.html">
+		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io/diarios//feed.xml">
+		<link rel="shortcut icon" href="https://jahpd.github.io/diarios//favicon.ico">
+		<link rel="apple-touch-icon" href="https://jahpd.github.io/diarios//apple-touch-icon.png">
+	</head>
+	<body>
+		<header class="site-header">
+		
+			<h1>
+				<a class="site-title" href="/" title="Diarios improvisados" rel="home">Diarios improvisados</a>
+			</h1>
+		
+		</header>
+		<div class="content" role="main">
+			<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<time class="post-date" datetime="2016-01-29T15:14:55-02:00">Jan 29, 2016</time>
+		<h1 class="post-title">Musica Rave, Algoraves e raspagem de dados (1)</h1>
+	</header>
+	<p>Dei um pulo no facebook e o feed do Carlos Palombini apareceu com uma coisa interessante: o guia de música eletronica de <a href="http://techno.org/electronic-music-guide/">Ishkur</a>. Fazia um tempo que pesquisava sobre a relação de categorização musical entre as <em>raves</em> e <a href="http://algorave.com/about/">algoraves</a>, mas sem um método eficiente para verificar.</p>
+
+<p>Uma <a href="https://web.archive.org/web/20120626123333/http://art.colorado.edu/hiaff/NP_NA_ART01_Intvs.htm">pesquisa rápida</a> permitiu ver que existe (em algum lugar…) um artigo e um dicionário, sobre o que Kenneth Taylor pensava, mas não estão mais disponíveis nos links originais (<a href="http://www.ishkur.com/articles/ishkur9.htm">aqui</a> e <a href="http://www.loungex.com/~ishkur">aqui</a>) :&lt;</p>
+
+<p>Por outro lado seria possível (re)construir base de dados, para <a href="https://en.wikipedia.org/wiki/Deep_learning">aprendizagem profunda</a> de categorizações musicais.</p>
+
+<p>or exemplo, ao clicarmos em <em>Jungle</em> &gt; <em>Rave</em>, a primeira faixa tocada é <em>Rave the rythm</em> de <em>CHANNEL X</em>. Fácil, agora é só tomar os nomes como uma questão no youtube. Para agilizar o processo, fiz um código python:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">yt</span>
+<span class="c"># </span>
+<span class="n">q</span> <span class="o">=</span> <span class="s">"</span><span class="se">\"</span><span class="s">Rave the rythm</span><span class="se">\"</span><span class="s"> </span><span class="se">\"</span><span class="s">Channel X</span><span class="se">\"</span><span class="s">"</span>
+
+<span class="c"># PROCESSA</span>
+<span class="n">write_data</span><span class="p">(</span><span class="n">yt</span><span class="p">(</span><span class="n">q</span><span class="p">))</span></code></pre></figure>
+
+<p>O método <code class="highlighter-rouge">yt</code> é definido em uma biblioteca que fiz <a href="https://www.github.com/jahpd/cantos_guarani">aqui</a>. Vou atualizar ela para verificar melhor. Mas o importante é o que ela me retorna no terminal:</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">=&gt; </span>Searching <span class="k">for </span>results ...
+<span class="gp">=&gt; </span>2016-01-29 15:24:20.398789: requesting https://www.youtube.com/results?search_query<span class="o">=</span><span class="s2">"Rave+the+rythm"</span>+<span class="s2">"Channel+X"</span> 
+<span class="gp">=&gt; </span>2016-01-29 15:24:22.589355: requesting https://www.youtube.com/watch?v<span class="o">=</span>k3-uluEYsVw 
+Writing ./data/k3-uluEYsVw.txt
+<span class="gp">=&gt; </span>2016-01-29 15:24:24.674638: requesting https://www.youtube.com/watch?v<span class="o">=</span>D4qIDd32rTQ 
+Writing ./data/D4qIDd32rTQ.txt
+<span class="gp">=&gt; </span>2016-01-29 15:24:26.656263: requesting https://www.youtube.com/watch?v<span class="o">=</span>Mx3LccRvidg&amp;list<span class="o">=</span>PLCWbgTPv9hID97jHDVzDGX_hFTvrdi9A8 
+Writing ./data/Mx3LccRvidg&amp;list<span class="o">=</span>PLCWbgTPv9hID97jHDVzDGX_hFTvrdi9A8.txt
+<span class="gp">=&gt; </span>2016-01-29 15:24:29.434472: requesting https://www.youtube.com/watch?v<span class="o">=</span>_qNb_jL5EsM
+...</code></pre></figure>
+
+<p>Os dados criados retornam informações como o título do vídeo, e uma descrição. A descrição tem maior peso de análise (que pode ser feito com uma biblioteca como <a href="http://www.nltk.org/">NLTK</a>). Separei alguns dos dados acima, na coluna abaixo, para exemplificar a raspagem, e como pode ser possível reconstruir um conhecimento específico sobre o <em>Channel X</em>, a partir do aplicativo de Kenneth Taylor:</p>
+
+<iframe width="560" height="420" src="https://www.youtube.com/embed/k3-uluEYsVw?color=white&amp;theme=light">&nbsp;</iframe>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Título</th>
+      <th style="text-align: right">Descrição</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">Channel X - Rave The Rhythm</td>
+      <td style="text-align: right">Beat Box International - Belgium - 1991Written-By – Van Lierop, Adams, Khan</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">VA - Channel X - Rave The Rythm HQ + download</td>
+      <td style="text-align: right">Track “Channel X - Rave The Rythm” from album “Vip Classics 30” by “VA”. Download “VA” mp3 music on http://tinyurl.com/oc8hkha</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">rave the rythm</td>
+      <td style="text-align: right">Original Track , Old School Anthem for back in the day RAVE scene</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Parkzicht house reunion 29.11.2014 official aftermovie</td>
+      <td style="text-align: right">The official Parkzicht aftermovie. November 29th 2014 at the Maasgebouw Rotterdam. Presented by b2s.Vimeo users watch here: <a href="https://vimeo.com/113499304Audiotrack">https://vimeo.com/113499304Audiotrack</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Free 4 you! 23.05.2015 official aftermovie</td>
+      <td style="text-align: right">The official aftermovie for Free 4 you! May 23rd 2015. Maassilo, Rotterdam (NL). Presented by b2s.Vimeo users watch here: https://vimeo.com/132943809Tracklist00:00 Deep zone - It’s Gonna Be Alright00:59 Grooveyard - Watch me now 01:28 Secret Cinema - Masculinity 01:56 Channel X - Rave the RythmMore</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">Magic the Gathering trade with Bushwick78</td>
+      <td style="text-align: right">Magic the Gathering is my favorite game. The background music is “Rave the Rythm” by ‘Channel X’ and used under the ‘Free Use Act’. No copyright infringement is intended. I am sorry for the mispronunciation and the poor video quality.How to trade Magic the Gathering Cards on You Tubehttp://www.youtube.com/watch?v=4kYJ7e…If you have any of the cards that are listed below, send me a message stating how many you have for trade and what cards you want. Fair trading only. Please don’t  try to tell me that my Maelstrom Pulse is a $5 card and your Haunting Echos is a $20 card. Thank you in advance.1) You send first.(I am a Safe and Trusted Trader. Watch my many trade videos)2) No damaged cards. 3)You mailed out with-in 3 days of agreement. 4) I send out next  day.  5) Be friendly and courteous. :o)6) After trust has been established, we mail at the same time!My want list:Rares:2- Vengevine - Rise of the Eldrazi (green)4- Gideon Jura - Rise of the Eldrazi (white)1- Elspeth Knight-Errant - Shards of Alara(white)4- Awakening Zone - Rise of the Eldrazi (green)3- Sarkhan the Mad - Rise of the Eldrazi (red/black)1-Student of Warfare - Rise of the Eldrazi(white)1-Jace Mindsculpter - Worldwake(blue)4-Banslayer Angel - M10(white)Lands:4-Dragonskull Summit - M102-Scalding Tarn - Zendikar1-Raging Ravine - Worldwake1-Misty Rainforest - Zendikar1-Marsh Flats - ZendikarSpecial Cards1- DCI Bloodbraid Elf - FNM/DCI foil (r/g)1-Textless Blightning</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Isso são poucos dados brutos. Ainda merecem um tratamento melhor (também não é possível considerar tudo como adequado). Mas com a raspagem de dados, informações pertinentes podem ser levantadas rapidamente. Assim que possível, vou incluir outros códigos que complementem esse.</p>
+
+</article>
+<a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
+
+		</div>
+		
+		<footer class="site-footer">
+			<small class="copyright">Theme by: oneohthree (some modifications by jahpd)</small>
+		</footer>
+		<script>
+			document.body.onscroll = function() {
+				var e = document.getElementById('go-top');
+				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
+					e.style.right = '.5em';
+				}
+				else e.style.right = '-1em';
+			}
+			var timeOut;
+			function scrollToTop() {
+				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
+					window.scrollBy(0,-50);
+					timeOut=setTimeout('scrollToTop()',5);
+				}
+				else clearTimeout(timeOut);
+			}
+		</script>
+	</body>
+</html>

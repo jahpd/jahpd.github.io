@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Supercollider (1)</title>
+		<meta name="description" content="Hoje resolvi adiantar uns códigos perdidos por aí. Aí vai o resultado de uma pequena improvisação que fiz ontem (lógico, a improvisação requer que o improvis...">
+		<link rel="stylesheet" href="https://jahpd.github.io/diarios//style.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'>
+		<link rel="canonical" href="https://jahpd.github.io/diarios//supercollider-1.html">
+		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io/diarios//feed.xml">
+		<link rel="shortcut icon" href="https://jahpd.github.io/diarios//favicon.ico">
+		<link rel="apple-touch-icon" href="https://jahpd.github.io/diarios//apple-touch-icon.png">
+	</head>
+	<body>
+		<header class="site-header">
+		
+			<h1>
+				<a class="site-title" href="/" title="Diarios improvisados" rel="home">Diarios improvisados</a>
+			</h1>
+		
+		</header>
+		<div class="content" role="main">
+			<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<time class="post-date" datetime="2016-01-28T17:22:44-02:00">Jan 28, 2016</time>
+		<h1 class="post-title">Supercollider (1)</h1>
+	</header>
+	<p>Hoje resolvi adiantar uns códigos perdidos por aí. Aí vai o resultado de uma pequena improvisação que fiz ontem (lógico, a improvisação requer que o improvisador mexa no código. Primeiro começa com a captura de audio do laptop pelo proprio laptop (feedback). Vamos salientar esse <em>feedback</em> com vários controles (imaginei na hora, mas são operações bem simples), e um embaralhamento de espectro com algum <em>Phase Vocoder</em>. Por último em reverb p criar um espaço.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Crie um espaço de improvisação</span>
+<span class="nx">s</span><span class="p">.</span><span class="nx">boot</span>
+
+<span class="nx">p</span> <span class="o">=</span> <span class="nx">ProxySpace</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">fadeTime</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1">// O universo conceitual desta improvisação</span>
+<span class="o">~</span><span class="nx">u</span> <span class="o">=</span> <span class="p">{</span><span class="nx">AudioIn</span><span class="p">.</span><span class="nx">ar</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])}</span>
+<span class="o">~</span><span class="nx">u</span><span class="p">.</span><span class="nx">stop</span>
+
+<span class="c1">// Um bloco de eventos</span>
+<span class="o">~</span><span class="nx">e1</span> <span class="o">=</span> <span class="p">{</span><span class="nx">Dust</span><span class="p">.</span><span class="nx">kr</span><span class="p">(</span><span class="mi">2800</span><span class="p">)}</span>
+
+<span class="c1">// Um primeiro referente opcional a ser operacionalizado</span>
+<span class="c1">// são as redes de Delays de Pauline Oliveiros e o feedback de Alvin Lucier</span>
+<span class="o">~</span><span class="nx">r1</span> <span class="o">=</span> <span class="p">{</span><span class="nx">CombL</span><span class="p">.</span><span class="nx">ar</span><span class="p">(</span><span class="o">~</span><span class="nx">u</span><span class="p">.</span><span class="nx">ar</span><span class="p">,</span> <span class="o">~</span><span class="nx">p1</span><span class="p">.</span><span class="nx">kr</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">~</span><span class="nx">p2</span><span class="p">.</span><span class="nx">kr</span><span class="p">,</span> <span class="o">~</span><span class="nx">u</span><span class="p">.</span><span class="nx">ar</span><span class="o">*~</span><span class="nx">e1</span><span class="p">.</span><span class="nx">kr</span><span class="p">)}</span>
+
+<span class="c1">// Um objetivo</span>
+<span class="o">~</span><span class="nx">o1</span> <span class="o">=</span> <span class="p">{</span><span class="nx">Line</span><span class="p">.</span><span class="nx">kr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)}</span> 
+
+<span class="c1">// Um Processo</span>
+<span class="o">~</span><span class="nx">p1</span> <span class="o">=</span> <span class="p">{</span><span class="nx">Saw</span><span class="p">.</span><span class="nx">kr</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)}</span>
+
+<span class="o">~</span><span class="nx">p2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="o">-</span><span class="p">(</span><span class="nx">Saw</span><span class="p">.</span><span class="nx">kr</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span><span class="na">mul</span><span class="p">:</span><span class="mf">0.15</span><span class="p">))}</span>
+
+<span class="c1">// Um segundo referente opcional para esta improvisação</span>
+<span class="o">~</span><span class="nx">r2</span> <span class="o">=</span><span class="p">{</span><span class="nx">IFFT</span><span class="p">(</span><span class="nx">PV_BinScramble</span><span class="p">(</span><span class="nx">FFT</span><span class="p">(</span><span class="nx">LocalBuf</span><span class="p">(</span><span class="mi">1024</span><span class="p">),</span><span class="o">~</span><span class="nx">r1</span><span class="p">.</span><span class="nx">ar</span><span class="p">),</span><span class="nx">MouseX</span><span class="p">.</span><span class="nx">kr</span><span class="p">,</span><span class="mf">0.2</span><span class="p">,</span><span class="o">~</span><span class="nx">e1</span><span class="p">.</span><span class="nx">kr</span><span class="p">)).</span><span class="nx">dup</span><span class="p">}</span>
+<span class="o">~</span><span class="nx">r3</span> <span class="o">=</span> <span class="p">{</span><span class="nx">IFFT</span><span class="p">(</span><span class="nx">PV_MagFreeze</span><span class="p">(</span><span class="nx">FFT</span><span class="p">(</span><span class="nx">LocalBuf</span><span class="p">(</span><span class="mi">1024</span><span class="p">),</span><span class="o">~</span><span class="nx">r2</span><span class="p">.</span><span class="nx">ar</span><span class="p">),</span><span class="o">~</span><span class="nx">e1</span><span class="p">.</span><span class="nx">kr</span><span class="p">)).</span><span class="nx">dup</span><span class="p">}</span>
+<span class="o">~</span><span class="nx">verb</span> <span class="o">=</span> <span class="p">{</span><span class="nx">FreeVerb</span><span class="p">.</span><span class="nx">ar</span><span class="p">([</span><span class="o">~</span><span class="nx">r2</span><span class="p">,</span><span class="o">~</span><span class="nx">r3</span><span class="p">],</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)}</span>
+<span class="o">~</span><span class="nx">verb</span><span class="p">.</span><span class="nx">play</span></code></pre></figure>
+
+
+</article>
+<a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
+
+		</div>
+		
+		<footer class="site-footer">
+			<small class="copyright">Theme by: oneohthree (some modifications by jahpd)</small>
+		</footer>
+		<script>
+			document.body.onscroll = function() {
+				var e = document.getElementById('go-top');
+				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
+					e.style.right = '.5em';
+				}
+				else e.style.right = '-1em';
+			}
+			var timeOut;
+			function scrollToTop() {
+				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
+					window.scrollBy(0,-50);
+					timeOut=setTimeout('scrollToTop()',5);
+				}
+				else clearTimeout(timeOut);
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Html5bytebeat (1)</title>
+		<meta name="description" content="Tenho improvisado alguns códigos, uns 15 a 20 minutos por dia, antes de me dedicar à tese.">
+		<link rel="stylesheet" href="https://jahpd.github.io/diarios//style.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'>
+		<link rel="canonical" href="https://jahpd.github.io/diarios//html5bytebeat-1.html">
+		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io/diarios//feed.xml">
+		<link rel="shortcut icon" href="https://jahpd.github.io/diarios//favicon.ico">
+		<link rel="apple-touch-icon" href="https://jahpd.github.io/diarios//apple-touch-icon.png">
+	</head>
+	<body>
+		<header class="site-header">
+		
+			<h1>
+				<a class="site-title" href="/" title="Diarios improvisados" rel="home">Diarios improvisados</a>
+			</h1>
+		
+		</header>
+		<div class="content" role="main">
+			<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<time class="post-date" datetime="2016-01-28T10:15:17-02:00">Jan 28, 2016</time>
+		<h1 class="post-title">Html5bytebeat (1)</h1>
+	</header>
+	<p>Tenho improvisado alguns códigos, uns 15 a 20 minutos por dia, antes de me dedicar à <a href="https://bitbucket.com/cravista/mestrado">tese</a>.</p>
+
+<p>Antes de cada improvisação, busco prestar atenção em uma <em>categorização musical</em> (ou gênero musical, mas essa palavra é complicada). Talvez num outro post me dedique a esse assunto.  Na verdade preciso falar sobre imagens em movimento no contexto  de uma categorização musical chamada <a href="https://en.wikipedia.org/wiki/Algorave"><em>algorave</em></a>.</p>
+
+<p>Aí lembrei do <em>bytebeat</em>, um tipo de música muito praticado por <em>hackers</em> nórdicos, mas que ganhou ampla aceitação da comunidade <a href=""><em>demoscene</em></a> (McLean2011) , por seu caráter enxuto de codificar uma “batida” de duração infinita (McLean2011). Um panorama mais amplo pode ser encontrado <a href="http://canonical.org/~kragen/bytebeat/">aqui</a> e no artigo seminal de <a href="https://www.youtube.com/user/viznut">Viznut</a> (Heikilla2011).</p>
+
+<iframe width="560" height="420" src="https://www.youtube.com/embed/tCRPUv8V22o?color=white&amp;theme=light">&nbsp;</iframe>
+
+<p>Existe um outro exemplo, mais interessante, onde viznut consegue enxugar mais ainda o código, tornando-o tão dinâmico que é possível associar um gesto ao código :</p>
+
+<iframe width="560" height="420" src="https://www.youtube.com/embed/aKMrBaXJvMs?color=white&amp;theme=light">&nbsp;</iframe>
+
+<p>Mas sobre o que queria falar ainda não falei. Existe uma página que discute sínteses audiovisuais <a href="http://games.greggman.com/game/html5-bytebeat/">online</a>, e explorei uma para ver diferenças de sonoridade ao alterar um caractere.</p>
+
+<p>Por exemplo, pegamos um código original:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// blueberry 2011-10-05
+// http://goo.gl/VeIpV3
+</span><span class="n">t</span><span class="o">*</span><span class="p">(((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">^</span><span class="p">((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">13</span><span class="p">)</span></code></pre></figure>
+
+<p>E começamos a modificar alguns caracteres</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// http://goo.gl/cjzNQa
+</span><span class="n">t</span><span class="o">*</span><span class="p">(((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">^</span><span class="p">((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">12</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// http://goo.gl/Tffyda
+</span><span class="n">t</span><span class="o">*</span><span class="p">(((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">^</span><span class="p">((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">11</span><span class="p">)</span></code></pre></figure>
+
+<p>A partir daqui, pausas começam a ser mais importantes:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// http://goo.gl/HY5Zmh
+</span><span class="n">t</span><span class="o">*</span><span class="p">(((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">^</span><span class="p">((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">10</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// http://goo.gl/bdPsWu
+</span><span class="n">t</span><span class="o">*</span><span class="p">(((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">^</span><span class="p">((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">9</span><span class="p">)</span></code></pre></figure>
+
+<p>O limite desta alternância melódica e pausas é o silêncio. De fato o último código funcional desta série é o silêncio absoluto. Um passo anterior ao silêncio, é um ostinato de uma nota só. Se colocarmos <code class="highlighter-rouge">2</code> ou <code class="highlighter-rouge">1</code> o ciclo encerra:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// http://goo.gl/TUVtWr
+</span><span class="n">t</span><span class="o">*</span><span class="p">(((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">^</span><span class="p">((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="mi">3</span><span class="p">)</span></code></pre></figure>
+
+<p>Poderia ser feito o caminho inverso, mas isso apenas levaria ao resultado extremo se, em vez de número, colocarmos a variável <code class="highlighter-rouge">t</code> (tempo):</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">// http://goo.gl/XRBTAz
+</span><span class="n">t</span><span class="o">*</span><span class="p">(((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">^</span><span class="p">((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">t</span><span class="p">)</span></code></pre></figure>
+
+<p>Também realizei o inverso, trocar um <code class="highlighter-rouge">t</code> por um número. No caso, colocando <code class="highlighter-rouge">13</code> no lugar do primeiro <code class="highlighter-rouge">t</code> levou a perceber uma certa “base de ritmos”:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">//http://goo.gl/wKb1GU
+</span><span class="mi">13</span><span class="o">*</span><span class="p">(((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">^</span><span class="p">((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="mi">9</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">^</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">t</span><span class="p">)</span></code></pre></figure>
+
+<p>Por outro lado, colocar <code class="highlighter-rouge">t</code> em tudo pode criar um <a href="https://en.wikipedia.org/wiki/Drone_(music)"><em>drone</em></a>:</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">//http://goo.gl/MVdbXb
+</span><span class="n">t</span><span class="o">*</span><span class="p">(((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="n">t</span><span class="p">)</span><span class="o">^</span><span class="p">((</span><span class="n">t</span><span class="o">&gt;&gt;</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="n">t</span><span class="p">)</span><span class="o">^</span><span class="n">t</span><span class="p">)</span><span class="o">%</span><span class="n">t</span><span class="p">)</span></code></pre></figure>
+
+<h1 id="referncias">Referências</h1>
+
+<figure class="highlight"><pre><code class="language-bibtex" data-lang="bibtex">@phdthesis{McLean2011,
+    title = {Artist-Programmers and Programming Languages for the Arts},
+    author = {McLean, Alex},
+    month = {October},
+    year = {2011},
+    school = {Department of Computing, Goldsmiths, University of London},
+    url = {http://slab.org/writing/thesis.pdf}
+	}
+
+@article{Heikilla2011,
+	title = {Discovering novel computer music techniques by exploring the space of short computer programs},
+	url = {http://arxiv.org/abs/1112.1368},
+	pages = {8},
+	journaltitle = {Cornell University Library},
+	author = {Heikkilä, Ville-Matias},
+	year = {2011}
+}</code></pre></figure>
+
+
+</article>
+<a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
+
+		</div>
+		
+		<footer class="site-footer">
+			<small class="copyright">Theme by: oneohthree (some modifications by jahpd)</small>
+		</footer>
+		<script>
+			document.body.onscroll = function() {
+				var e = document.getElementById('go-top');
+				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
+					e.style.right = '.5em';
+				}
+				else e.style.right = '-1em';
+			}
+			var timeOut;
+			function scrollToTop() {
+				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
+					window.scrollBy(0,-50);
+					timeOut=setTimeout('scrollToTop()',5);
+				}
+				else clearTimeout(timeOut);
+			}
+		</script>
+	</body>
+</html>

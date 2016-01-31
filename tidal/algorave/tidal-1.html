@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Tidal (1)</title>
+		<meta name="description" content="Uma idéia para começar um algorave no Tidal">
+		<link rel="stylesheet" href="https://jahpd.github.io/diarios//style.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'>
+		<link rel="canonical" href="https://jahpd.github.io/diarios//tidal/algorave/tidal-1.html">
+		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io/diarios//feed.xml">
+		<link rel="shortcut icon" href="https://jahpd.github.io/diarios//favicon.ico">
+		<link rel="apple-touch-icon" href="https://jahpd.github.io/diarios//apple-touch-icon.png">
+	</head>
+	<body>
+		<header class="site-header">
+		
+			<h1>
+				<a class="site-title" href="/" title="Diarios improvisados" rel="home">Diarios improvisados</a>
+			</h1>
+		
+		</header>
+		<div class="content" role="main">
+			<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<time class="post-date" datetime="2016-01-31T21:01:32-02:00">Jan 31, 2016</time>
+		<h1 class="post-title">Tidal (1)</h1>
+	</header>
+	<p>Uma idéia para começar um algorave no <a href="http://tidal.lurk.org/">Tidal</a></p>
+
+<figure class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="n">d1</span> <span class="o">$</span> <span class="n">every</span> <span class="mi">4</span> <span class="p">(</span><span class="n">density</span> <span class="mf">0.5</span><span class="p">)</span> <span class="p">(</span><span class="n">sound</span> <span class="s">"bass3 [sn house:2] [silence house] sn:2"</span><span class="p">)</span>
+
+<span class="n">d2</span> <span class="o">$</span> <span class="n">palindrome</span> <span class="o">$</span> <span class="n">every</span> <span class="mi">4</span> <span class="p">(</span><span class="n">density</span> <span class="mf">0.5</span><span class="p">)</span>
+   <span class="o">$</span> <span class="n">sound</span> <span class="s">"diphone [arpy:4 diphone2:2] silence silence"</span></code></pre></figure>
+
+
+</article>
+<a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
+
+		</div>
+		
+		<footer class="site-footer">
+			<small class="copyright">Theme by: oneohthree (some modifications by jahpd)</small>
+		</footer>
+		<script>
+			document.body.onscroll = function() {
+				var e = document.getElementById('go-top');
+				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
+					e.style.right = '.5em';
+				}
+				else e.style.right = '-1em';
+			}
+			var timeOut;
+			function scrollToTop() {
+				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
+					window.scrollBy(0,-50);
+					timeOut=setTimeout('scrollToTop()',5);
+				}
+				else clearTimeout(timeOut);
+			}
+		</script>
+	</body>
+</html>

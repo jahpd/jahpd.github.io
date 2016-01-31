@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Klee Exercícios (1)</title>
+		<meta name="description" content="Estava re-lendo a tese do Alex Mclean e resolvi subir três códigos onde ele exemplifica o processo criativa do improvisador-programador.">
+		<link rel="stylesheet" href="https://jahpd.github.io/diarios//style.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'>
+		<link rel="canonical" href="https://jahpd.github.io/diarios//processing/images/creative%20process/klee-exerccios-1.html">
+		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io/diarios//feed.xml">
+		<link rel="shortcut icon" href="https://jahpd.github.io/diarios//favicon.ico">
+		<link rel="apple-touch-icon" href="https://jahpd.github.io/diarios//apple-touch-icon.png">
+	</head>
+	<body>
+		<header class="site-header">
+		
+			<h1>
+				<a class="site-title" href="/" title="Diarios improvisados" rel="home">Diarios improvisados</a>
+			</h1>
+		
+		</header>
+		<div class="content" role="main">
+			<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<header class="post-header">
+		<time class="post-date" datetime="2016-01-29T21:04:34-02:00">Jan 29, 2016</time>
+		<h1 class="post-title">Klee Exercícios (1)</h1>
+	</header>
+	<p>Estava re-lendo a tese do Alex Mclean e resolvi subir três códigos onde ele exemplifica o processo criativa do improvisador-programador.</p>
+
+<canvas id="p5_abstrato" class="processing"><p>If you are reading this, it is because your browser does not support the HTML5 canvas element.</p></canvas>
+<p id="p5_abstrato_error" class="processing"></p>
+<script type="text/javascript" id="gen_p5_abstrato">
+function render_p5_abstrato(callback) {
+  try {
+    var c = document.getElementById('p5_abstrato'); 
+    var proc = Processing.compile("float rx(){ return(random(width)) }\nfloat ry(){ return(random(height)) }\n\nvoid draw(){\n\tbackground(255);\n\tfor(int i=0; i<20. i++){\n\t\tbezier(rx(),ry(),rx(),ry(),\n\t\t\trx(),ry(),rx(),ry());\n\t}\n}");
+    callback(false, new Processing(c, new Function(proc.sourceCode)));
+  } catch (e) {
+    callback(e);
+  }
+}
+
+render_p5_abstrato(function(err, processing){
+  if(!err){
+    $('p.processing#p5_abstrato_error').text('');
+    console.log('DONE');
+  }
+  else{
+    console.log(err);
+  }
+});
+</script>
+
+<canvas id="p5_abstrato" class="processing"><p>If you are reading this, it is because your browser does not support the HTML5 canvas element.</p></canvas>
+<p id="p5_abstrato_error" class="processing"></p>
+<script type="text/javascript" id="gen_p5_abstrato">
+function render_p5_abstrato(callback) {
+  try {
+    var c = document.getElementById('p5_abstrato'); 
+    var proc = Processing.compile("float rx(){ return(random(width)) }\nfloat ry(){ return(random(height)) }\n\nvoid draw(){\n\tbackground(255);\n\tfor(int i=0; i<5. i++){\n\t\tfloat x1 = rx(); float y1 = rx();\n\t\tbezier(x,y,rx(),ry(),rx(),ry(),x1,y1);\n\t\tx = x1; y = y1;\n\t}\n}");
+    callback(false, new Processing(c, new Function(proc.sourceCode)));
+  } catch (e) {
+    callback(e);
+  }
+}
+
+render_p5_abstrato(function(err, processing){
+  if(!err){
+    $('p.processing#p5_abstrato_error').text('');
+    console.log('DONE');
+  }
+  else{
+    console.log(err);
+  }
+});
+</script>
+
+<h1 id="referncias">Referências</h1>
+
+<figure class="highlight"><pre><code class="language-bibtex" data-lang="bibtex">@phdthesis{McLean2011,
+    title = {Artist-Programmers and Programming Languages for the Arts},
+    author = {McLean, Alex},
+    month = {October},
+    year = {2011},
+    school = {Department of Computing, Goldsmiths, University of London},
+    url = {http://slab.org/writing/thesis.pdf}
+	}</code></pre></figure>
+
+
+</article>
+<a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
+
+		</div>
+		
+		<footer class="site-footer">
+			<small class="copyright">Theme by: oneohthree (some modifications by jahpd)</small>
+		</footer>
+		<script>
+			document.body.onscroll = function() {
+				var e = document.getElementById('go-top');
+				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
+					e.style.right = '.5em';
+				}
+				else e.style.right = '-1em';
+			}
+			var timeOut;
+			function scrollToTop() {
+				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
+					window.scrollBy(0,-50);
+					timeOut=setTimeout('scrollToTop()',5);
+				}
+				else clearTimeout(timeOut);
+			}
+		</script>
+	</body>
+</html>
