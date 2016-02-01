@@ -23,60 +23,58 @@
 		
 		</header>
 		<div class="content" role="main">
-			<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+			<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/processing.min.js"></script>
+<script src="/assets/js/render.js"></script>
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 	<header class="post-header">
 		<time class="post-date" datetime="2016-01-29T21:04:34-02:00">Jan 29, 2016</time>
 		<h1 class="post-title">Klee Exercícios (1)</h1>
 	</header>
 	<p>Estava re-lendo a tese do Alex Mclean e resolvi subir três códigos onde ele exemplifica o processo criativa do improvisador-programador.</p>
 
-<canvas id="p5_abstrato" class="processing"><p>If you are reading this, it is because your browser does not support the HTML5 canvas element.</p></canvas>
-<p id="p5_abstrato_error" class="processing"></p>
-<script type="text/javascript" id="gen_p5_abstrato">
-function render_p5_abstrato(callback) {
-  try {
-    var c = document.getElementById('p5_abstrato'); 
-    var proc = Processing.compile("float rx(){ return(random(width)) }\nfloat ry(){ return(random(height)) }\n\nvoid draw(){\n\tbackground(255);\n\tfor(int i=0; i<20. i++){\n\t\tbezier(rx(),ry(),rx(),ry(),\n\t\t\trx(),ry(),rx(),ry());\n\t}\n}");
-    callback(false, new Processing(c, new Function(proc.sourceCode)));
-  } catch (e) {
-    callback(e);
-  }
-}
+<div class="example" id="abstrato1"><pre><code class="language-javascript"></code></pre></div>
+<p>function rx(){
+  return(random(width));
+}</p>
 
-render_p5_abstrato(function(err, processing){
-  if(!err){
-    $('p.processing#p5_abstrato_error').text('');
-    console.log('DONE');
-  }
-  else{
-    console.log(err);
-  }
-});
-</script>
+<p>function ry(){
+  return(random(height));
+}</p>
 
-<canvas id="p5_abstrato" class="processing"><p>If you are reading this, it is because your browser does not support the HTML5 canvas element.</p></canvas>
-<p id="p5_abstrato_error" class="processing"></p>
-<script type="text/javascript" id="gen_p5_abstrato">
-function render_p5_abstrato(callback) {
-  try {
-    var c = document.getElementById('p5_abstrato'); 
-    var proc = Processing.compile("float rx(){ return(random(width)) }\nfloat ry(){ return(random(height)) }\n\nvoid draw(){\n\tbackground(255);\n\tfor(int i=0; i<5. i++){\n\t\tfloat x1 = rx(); float y1 = rx();\n\t\tbezier(x,y,rx(),ry(),rx(),ry(),x1,y1);\n\t\tx = x1; y = y1;\n\t}\n}");
-    callback(false, new Processing(c, new Function(proc.sourceCode)));
-  } catch (e) {
-    callback(e);
-  }
-}
+<p>function setup(){
+  size(400, 400);
+}</p>
 
-render_p5_abstrato(function(err, processing){
-  if(!err){
-    $('p.processing#p5_abstrato_error').text('');
-    console.log('DONE');
+<p>function draw(){
+  background(255);
+  for(int i=0; i&lt;20. i++){
+    bezier(rx(),ry(),rx(),ry(),rx(),ry(),rx(),ry());
   }
-  else{
-    console.log(err);
+}</p>
+
+<div class="example" id="abstrato2"><pre><code class="language-javascript"></code></pre></div>
+<p>function rx(){
+  return(random(width));
+}</p>
+
+<p>function ry(){
+  return(random(height));
+}</p>
+
+<p>function setup(){
+  size(400, 400);
+}</p>
+
+<p>function draw(){
+  background(255);
+  for(int i=0; i&lt;5. i++){
+    float x1 = rx(); float y1 = rx();
+    bezier(x,y,rx(),ry(),rx(),ry(),x1,y1);
+    x = x1; y = y1;
   }
-});
-</script>
+}</p>
 
 <h1 id="referncias">Referências</h1>
 
@@ -90,6 +88,7 @@ render_p5_abstrato(function(err, processing){
 	}</code></pre></figure>
 
 
+	<script type="text/javascript">renderCode()</script>
 </article>
 <a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
 
