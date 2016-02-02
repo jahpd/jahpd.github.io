@@ -1,4 +1,4 @@
-function renderCode(sel) {
+window.renderCode = function(sel) {
   var _p5 = p5;
   var instances = [];
   var selector = sel || 'example';

@@ -23,11 +23,7 @@
 		
 		</header>
 		<div class="content" role="main">
-			<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/processing.min.js"></script>
-<script src="/assets/js/render.js"></script>
-
-<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+			<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 	<header class="post-header">
 		<time class="post-date" datetime="2016-01-28T17:22:44-02:00">Jan 28, 2016</time>
 		<h1 class="post-title">Supercollider (1)</h1>
@@ -66,7 +62,6 @@
 <span class="o">~</span><span class="nx">verb</span><span class="p">.</span><span class="nx">play</span></code></pre></figure>
 
 
-	<script type="text/javascript">renderCode()</script>
 </article>
 <a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
 
@@ -90,6 +85,10 @@
 					timeOut=setTimeout('scrollToTop()',5);
 				}
 				else clearTimeout(timeOut);
+			}
+
+			if(window.renderCode !== undefined){
+			        window.renderCode();
 			}
 		</script>
 	</body>

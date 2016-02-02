@@ -23,11 +23,7 @@
 		
 		</header>
 		<div class="content" role="main">
-			<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/processing.min.js"></script>
-<script src="/assets/js/render.js"></script>
-
-<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+			<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 	<header class="post-header">
 		<time class="post-date" datetime="2016-01-30T15:16:00-02:00">Jan 30, 2016</time>
 		<h1 class="post-title">Musica Rave E Algoraves (2)</h1>
@@ -1525,7 +1521,6 @@
 </table>
 
 
-	<script type="text/javascript">renderCode()</script>
 </article>
 <a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
 
@@ -1549,6 +1544,10 @@
 					timeOut=setTimeout('scrollToTop()',5);
 				}
 				else clearTimeout(timeOut);
+			}
+
+			if(window.renderCode !== undefined){
+			        window.renderCode();
 			}
 		</script>
 	</body>
