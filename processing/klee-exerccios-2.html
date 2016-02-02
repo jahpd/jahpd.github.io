@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Klee Exercícios (2)</title>
-		<meta name="description" content="Acabei de atualizar alguns plugins para Jekyll. Pode ser bastante útil para escrever sketchs processing, partituras através do VexFlow e outras coisas em blo...">
+		<meta name="description" content="">
 		<link rel="stylesheet" href="https://jahpd.github.io/diarios//style.css">
 		<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'>
@@ -28,7 +28,34 @@
 		<time class="post-date" datetime="2016-02-02T19:12:39-02:00">Feb 02, 2016</time>
 		<h1 class="post-title">Klee Exercícios (2)</h1>
 	</header>
-	<p>Acabei de atualizar alguns <a href="https://github.com/jahpd/jekyll-plugin-artmedias">plugins</a> para <a href="https://jekyllrb.com">Jekyll</a>. Pode ser bastante útil para escrever <em>sketchs</em> processing, partituras através do VexFlow e outras coisas em blogs (suportados pelo Jekyll, é lógico).</p>
+	<link rel="stylesheet" href="/assets/css/prism.css" type="text/css" />
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/processing.min.js"></script>
+<script src="/assets/js/render.js"></script>
+
+<p>Acabei de atualizar alguns <a href="https://github.com/jahpd/jekyll-plugin-artmedias">plugins</a> para <a href="https://jekyllrb.com">Jekyll</a>. Pode ser bastante útil para escrever <em>sketchs</em> processing, partituras através do VexFlow e outras coisas em blogs (suportados pelo Jekyll, é lógico). Tinha escrito outro <a href="/processing/images/creative%20process/klee-exerccios-1.html">post</a>, mas ele está com alguns problemas (renderiza duas vezes).</p>
+
+<p>Enquanto não atualiza, jogo um sketch;</p>
+
+<div class="example" id="abstratoum">abstratoum <pre><code class="language-javascript">
+function rx(){
+  return random(width);
+}
+	
+function ry(){
+  return random(height);
+}
+
+createCanvas(480, 360);
+background(255);
+var i;
+for(i=0; i &lt; 20; i++) {
+  bezier(rx(),ry(),rx(),ry(),rx(),ry(),rx(),ry());
+}
+</code></pre></div>
+
+<script type="text/javascript">window.renderCode()</script>
+
 
 </article>
 <a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
