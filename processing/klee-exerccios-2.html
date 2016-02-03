@@ -39,6 +39,7 @@
 
 <div class="example" id="abstratoum">abstratoum <pre><code class="language-javascript">
 
+
 function _(x){return random(x);}
 function rx(){return _(width);}
 function ry(){return _(height);}
@@ -54,8 +55,8 @@ function draw(){
   for(i=0; i &lt; 20; i++) {
     r = rc(); g = rc(); b = rc();
     x = rx(); y = ry();
-    stroke(max(_r||0,r),max(_g||0,g),max(_b||0,b));
-    fill(0);
+    stroke(max(_r||0,r),max(_g||0,g),max(_b||0,b), rc());
+    fill(0, 0, 0, rc());
     bezier(x,y,rx(),ry(),rx(),ry(),_x||width/2,_y||height/2);
     _x = x; _y = y; _r = r; _g = g; _b = b;
   }
