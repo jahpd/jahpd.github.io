@@ -28,10 +28,7 @@
 		
 		</header>
 		<div class="content" role="main">
-			<script src="/assets/js/app.js"/>
-  
- 
-</script>
+			</script>
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
     <time class="post-date" datetime="2016-02-03T19:11:37-02:00">Feb 03, 2016</time>
@@ -41,34 +38,26 @@
 
 <p>Acabei de atualizar alguns <a href="https://github.com/jahpd/jekyll-plugin-artmedias">plugins</a> para <a href="https://jekyllrb.com">Jekyll</a>. Dessa vez para síntese sonora.</p>
 
-<p>É bastante simples; algumas funções são carregadas diretamente. Este post é pra testar uma senóide. Abaixo exemplifico como utilizar no Jekyll:</p>
+<p>É bastante simples; algumas funções são carregadas diretamente. Este post é pra testar uma senóide. Abaixo exemplifico como utilizar no Jekyll. Primeiro adicionamos uma tag no arquivo <a href="https://daringfireball.net/projects/markdown/">markdown</a>, onde se escreve uma postagem.</p>
 
-<p>Primeiro é necessário chamar o script:</p>
+<figure class="highlight"><pre><code class="language-markdown" data-lang="markdown">{% wavepotload %}</code></pre></figure>
 
-<p>{% wavepotload %}</p>
+<p>Depois podemos adicionar um código javascript para realizar a síntese:</p>
 
-<p>Depois escrevemos um código que rederiza:</p>
+<figure class="highlight"><pre><code class="language-markdownn" data-lang="markdownn">{% wavepot sin %}
+    function dsp(){
+	  return sin(442,0.71);
+	}
+{% endwavepot %}</code></pre></figure>
 
-<p>{% wavepot quatrocentos %}
-sin(442,0.71)
-{% endwavepot %}</p>
+<p>E o resultado é esse. No meu navegador estou tendo <a href="https://en.wikipedia.org/wiki/Xrun">xruns</a>…</p>
 
-<p>E o resultado é esse:</p>
+<div class="wavepot" id="quatrocentos"><button class="play">play</button><button class="stop">stop</button><pre class="highlight language-javascript" data-lang="javascript"><code>function dsp(){
+  return sin(442,0.71);
+}<code />
 
-<div class="wavepot" id="quatrocentos">
-  <figure class="highlight">
-    <pre class="language-javascript" data-lang="javascript">
-      <code>
-sin(442,0.71)
-<code />
-    
-  
-  <div class="controls">
-    <button class="play">play</button>
-    <button class="stop">stop</button>
-  </div>
 
-</code></pre></figure></div>
+</code></pre></div>
 
 </article>
 <a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>

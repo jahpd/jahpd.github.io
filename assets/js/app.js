@@ -1,5 +1,5 @@
-(function(p5,wp){
-    this.wp = wp
+(function(p5){
+    var wp = {}; 
     $(document).ready(function(){
 	if(p5 !== undefined){
 	    p5();
@@ -9,35 +9,27 @@
 	var context = new contextClass();
 	
 	if(wp){
-	    $(".wavepot").each(function($e){
-		var id = $e.att('id')
-		this.wp[id] = new WavepotRuntime({context: context, channels:2, bufferSize:1024});
-	    })
-	    $('.play').button({text: false, icons: {primary: "ui-icon-play"}}).click(function(){
-		var id = $(this).attr('id')
-		if ( $( this ).text() === "play" ) {
-		    options = {
-			label: "pause",
-			icons: {
-			    primary: "ui-icon-pause"
+	    $(".wavepot").each(function(i, e){
+		var id = $(e).attr('id')
+		wp[id] = {
+		    play:  $('.play').button({text: false, icons: {primary: "ui-icon-play"}}).click(function(){
+			var txt = $(this).text()
+			if (txt === "play" ) {
+			    var text = $("#"+id+">pre>code").text()
+			    wp[id]["runtime"] = new window.WavepotRuntime({context: context, channels:2, bufferSize:1024});
+			    wp[id].runtime.compile(text);
+			    wp[id].runtime.play();
+			    $(this).button("option", {label: "pause",icons: {primary: "ui-icon-pause"}});
+			} else { 
+			    if(wp[id].runtime) wp[id].runtime.pause();
+			    $(this).button("option", {label: "play",icons: {primary: "ui-icon-play"}});
 			}
-		    };
-		    this.wp[id].compile($("#"+$(this).attr('id')+">figure>pre>code").text());
-		    this.wp[id].play()
-		} else {
-		    options = {
-			label: "play",
-			icons: {
-			    primary: "ui-icon-play"
-			}
-		    };
-		    this.wp[id].pause()
-		}
-	    });
-	    
-	    $('.stop').button({text: false, icons: {primary: "ui-icon-stop"}}).click(function(){
-		this.wp[id].stop()
+		    }),
+		    stop: $('.stop').button({text: false, icons: {primary: "ui-icon-stop"}}).click(function(){
+			if(wp[id].runtime) wp[id].runtime.stop();
+		    })
+		};
 	    });
 	}
     });
-}(renderCode, {}))
+}(window.RenderCode, {}))
