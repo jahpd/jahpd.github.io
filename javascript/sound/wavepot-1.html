@@ -4,12 +4,12 @@
 		<meta charset="utf-8"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>Klee Exercícios (2)</title>
+		<title>Wavepot (1)</title>
 		<meta name="description" content=""/>
 		<link rel="stylesheet" href="https://jahpd.github.io/diarios//style.css">
 		<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'/>
 		<link href='https://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'/>
-		<link rel="canonical" href="https://jahpd.github.io/diarios//processing/klee-exerccios-2.html"/>
+		<link rel="canonical" href="https://jahpd.github.io/diarios//javascript/sound/wavepot-1.html"/>
 		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io/diarios//feed.xml"/>
 		<link rel="shortcut icon" href="https://jahpd.github.io/diarios//favicon.ico"/>
 		<link rel="apple-touch-icon" href="https://jahpd.github.io/diarios//apple-touch-icon.png"/>
@@ -34,45 +34,41 @@
 </script>
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
-    <time class="post-date" datetime="2016-02-02T19:12:39-02:00">Feb 02, 2016</time>
-    <h1 class="post-title">Klee Exercícios (2)</h1>
+    <time class="post-date" datetime="2016-02-03T19:11:37-02:00">Feb 03, 2016</time>
+    <h1 class="post-title">Wavepot (1)</h1>
   </header>
-  <link rel="stylesheet" href="/assets/css/prism.css" type="text/css" />
-<script src="/assets/js/processing.min.js"></script>
-<script src="/assets/js/render.js"></script>
+  <script src="/assets/js/wavepotRT.js"></script>
 
-<p>Acabei de atualizar alguns <a href="https://github.com/jahpd/jekyll-plugin-artmedias">plugins</a> para <a href="https://jekyllrb.com">Jekyll</a>. Pode ser bastante útil para escrever <em>sketchs</em> processing, partituras através do VexFlow e outras coisas em blogs (suportados pelo Jekyll, é lógico). Tinha escrito outro <a href="/processing/images/creative%20process/klee-exerccios-1.html">post</a>, mas ele está com alguns problemas (renderiza duas vezes).</p>
+<p>Acabei de atualizar alguns <a href="https://github.com/jahpd/jekyll-plugin-artmedias">plugins</a> para <a href="https://jekyllrb.com">Jekyll</a>. Dessa vez para síntese sonora.</p>
 
-<p>Enquanto não existir atualizações, jogo um sketch;</p>
+<p>É bastante simples; algumas funções são carregadas diretamente. Este post é pra testar uma senóide. Abaixo exemplifico como utilizar no Jekyll:</p>
 
-<div class="example" id="abstratoum">abstratoum<pre><code class="language-javascript">
+<p>Primeiro é necessário chamar o script:</p>
 
+<p>{% wavepotload %}</p>
 
-function _(x){return random(x);}
-function rx(){return _(width);}
-function ry(){return _(height);}
-function rc(){return _(255);}
-function setup(){
-  createCanvas(480, 360);
-  frameRate(0.5);
-}
-function draw(){ 
-  background(0);
-  var i, r,g,b,x,y;
-  var _r,_g,_b,_x,_y;
-  for(i=0; i &lt; 20; i++) {
-    r = rc(); g = rc(); b = rc();
-    x = rx(); y = ry();
-    stroke(max(_r||0,r),max(_g||0,g),max(_b||0,b), rc());
-    fill(0, 0, 0, rc());
-    bezier(x,y,rx(),ry(),rx(),ry(),_x||width/2,_y||height/2);
-    _x = x; _y = y; _r = r; _g = g; _b = b;
-  }
-}
-</code></pre></div>
+<p>Depois escrevemos um código que rederiza:</p>
 
-<script type="text/javascript">window.renderCode()</script>
+<p>{% wavepot quatrocentos %}
+sin(442,0.71)
+{% endwavepot %}</p>
 
+<p>E o resultado é esse:</p>
+
+<div class="wavepot" id="quatrocentos">
+  <figure class="highlight">
+    <pre class="language-javascript" data-lang="javascript">
+      <code>
+sin(442,0.71)
+<code />
+    
+  
+  <div class="controls">
+    <button class="play">play</button>
+    <button class="stop">stop</button>
+  </div>
+
+</code></pre></figure></div>
 
 </article>
 <a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>

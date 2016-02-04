@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt_BR">
 	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>Klee Exercícios (1)</title>
-		<meta name="description" content="">
+		<meta name="description" content=""/>
 		<link rel="stylesheet" href="https://jahpd.github.io/diarios//style.css">
-		<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'>
-		<link rel="canonical" href="https://jahpd.github.io/diarios//processing/images/creative%20process/klee-exerccios-1.html">
-		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io/diarios//feed.xml">
-		<link rel="shortcut icon" href="https://jahpd.github.io/diarios//favicon.ico">
-		<link rel="apple-touch-icon" href="https://jahpd.github.io/diarios//apple-touch-icon.png">
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'/>
+		<link href='https://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'/>
+		<link rel="canonical" href="https://jahpd.github.io/diarios//processing/images/creative%20process/klee-exerccios-1.html"/>
+		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io/diarios//feed.xml"/>
+		<link rel="shortcut icon" href="https://jahpd.github.io/diarios//favicon.ico"/>
+		<link rel="apple-touch-icon" href="https://jahpd.github.io/diarios//apple-touch-icon.png"/>
+		<link rel="stylesheet" href="/assets/css/jquery-ui.min.css"/>
 	</head>
 	<body>
+	        <script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery-ui.min.js"></script>
+		<script src="/assets/js/scroll.js"></script>
+		<script src="/assets/js/app.js"></script>
 		<header class="site-header">
 		
 			<h1>
@@ -23,19 +28,22 @@
 		
 		</header>
 		<div class="content" role="main">
-			<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<header class="post-header">
-		<time class="post-date" datetime="2016-01-29T21:04:34-02:00">Jan 29, 2016</time>
-		<h1 class="post-title">Klee Exercícios (1)</h1>
-	</header>
-	<link rel="stylesheet" href="/assets/css/prism.css" type="text/css" />
-<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/app.js"/>
+  
+ 
+</script>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <time class="post-date" datetime="2016-01-29T21:04:34-02:00">Jan 29, 2016</time>
+    <h1 class="post-title">Klee Exercícios (1)</h1>
+  </header>
+  <link rel="stylesheet" href="/assets/css/prism.css" type="text/css" />
 <script src="/assets/js/processing.min.js"></script>
 <script src="/assets/js/render.js"></script>
 
 <p>Estava re-lendo a tese do Alex Mclean e resolvi subir três códigos onde ele exemplifica o processo criativa do improvisador-programador. O sketch foi feito com um plugin <a href="https://github.com/jahpd/jekyll-plugin-artmedias">jekyll</a> que fiz a uns dois anos.</p>
 
-<div class="example" id="abstratoum">abstratoum <pre><code class="language-javascript">
+<div class="example" id="abstratoum">abstratoum<pre><code class="language-javascript">
 function rx(){
   return random(width);
 }
@@ -69,31 +77,11 @@ for(i=0; i &lt; 20; i++) {
 </article>
 <a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
 
+
 		</div>
 		
 		<footer class="site-footer">
 			<small class="copyright">Theme by: oneohthree (some modifications by jahpd)</small>
 		</footer>
-		<script>
-			document.body.onscroll = function() {
-				var e = document.getElementById('go-top');
-				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
-					e.style.right = '.5em';
-				}
-				else e.style.right = '-1em';
-			}
-			var timeOut;
-			function scrollToTop() {
-				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
-					window.scrollBy(0,-50);
-					timeOut=setTimeout('scrollToTop()',5);
-				}
-				else clearTimeout(timeOut);
-			}
-
-			if(window.renderCode !== undefined){
-			        window.renderCode();
-			}
-		</script>
 	</body>
 </html>

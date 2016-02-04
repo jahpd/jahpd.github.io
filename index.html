@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt_BR">
 	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>Diarios improvisados</title>
-		<meta name="description" content="Improvisações, live coding. Pode ser que outras coisas apareçam...">
+		<meta name="description" content="Improvisações, live coding. Pode ser que outras coisas apareçam..."/>
 		<link rel="stylesheet" href="https://jahpd.github.io/diarios//style.css">
-		<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'>
-		<link rel="canonical" href="https://jahpd.github.io/diarios//">
-		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io/diarios//feed.xml">
-		<link rel="shortcut icon" href="https://jahpd.github.io/diarios//favicon.ico">
-		<link rel="apple-touch-icon" href="https://jahpd.github.io/diarios//apple-touch-icon.png">
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'/>
+		<link href='https://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'/>
+		<link rel="canonical" href="https://jahpd.github.io/diarios//"/>
+		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io/diarios//feed.xml"/>
+		<link rel="shortcut icon" href="https://jahpd.github.io/diarios//favicon.ico"/>
+		<link rel="apple-touch-icon" href="https://jahpd.github.io/diarios//apple-touch-icon.png"/>
+		<link rel="stylesheet" href="/assets/css/jquery-ui.min.css"/>
 	</head>
 	<body>
+	        <script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery-ui.min.js"></script>
+		<script src="/assets/js/scroll.js"></script>
+		<script src="/assets/js/app.js"></script>
 		<header class="site-header">
 		
 			<h1>
@@ -24,6 +29,28 @@
 		</header>
 		<div class="content" role="main">
 			<ul class="entries">
+
+	<li class="entry group">
+		<div class="entry-date">
+			<time datetime="2016-02-04T10:24:11-02:00">Feb 4, 2016</time>
+		</div>
+		<div class="entry-title">
+			<h2>
+			<a class="post-link" href="/lang/sound/netnografia.html">Netnografia</a>
+			</h2>
+		</div>
+	</li>
+
+	<li class="entry group">
+		<div class="entry-date">
+			<time datetime="2016-02-03T19:11:37-02:00">Feb 3, 2016</time>
+		</div>
+		<div class="entry-title">
+			<h2>
+			<a class="post-link" href="/javascript/sound/wavepot-1.html">Wavepot (1)</a>
+			</h2>
+		</div>
+	</li>
 
 	<li class="entry group">
 		<div class="entry-date">
@@ -113,22 +140,13 @@
 		</div>
 	</li>
 
-	<li class="entry group">
-		<div class="entry-date">
-			<time datetime="2016-01-28T10:15:17-02:00">Jan 28, 2016</time>
-		</div>
-		<div class="entry-title">
-			<h2>
-			<a class="post-link" href="/html5bytebeat-1.html">Html5bytebeat (1)</a>
-			</h2>
-		</div>
-	</li>
-
 </ul>
 
 		</div>
 		
 		<nav class="pagination group" role="navigation">
+		
+			<a href="/page/2/">&larr;</a>
 		
 		
 		</nav>
@@ -136,26 +154,5 @@
 		<footer class="site-footer">
 			<small class="copyright">Theme by: oneohthree (some modifications by jahpd)</small>
 		</footer>
-		<script>
-			document.body.onscroll = function() {
-				var e = document.getElementById('go-top');
-				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
-					e.style.right = '.5em';
-				}
-				else e.style.right = '-1em';
-			}
-			var timeOut;
-			function scrollToTop() {
-				if (document.body.scrollTop !=0 || document.documentElement.scrollTop != 0) {
-					window.scrollBy(0,-50);
-					timeOut=setTimeout('scrollToTop()',5);
-				}
-				else clearTimeout(timeOut);
-			}
-
-			if(window.renderCode !== undefined){
-			        window.renderCode();
-			}
-		</script>
 	</body>
 </html>
