@@ -28,12 +28,12 @@
 		</header>
 		<div class="content" role="main">
 			</script>
-<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header class="post-header">
-    <time class="post-date" datetime="2016-01-28T17:22:44-02:00">Jan 28, 2016</time>
-    <h1 class="post-title">Supercollider (1)</h1>
+<article class="posts" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post post-title">
+    <h1 class="post">Supercollider (1)</h1>
   </header>
-  <p>Hoje resolvi adiantar uns códigos perdidos por aí. Aí vai o resultado de uma pequena improvisação que fiz ontem (lógico, a improvisação requer que o improvisador mexa no código. Primeiro começa com a captura de audio do laptop pelo proprio laptop (feedback). Vamos salientar esse <em>feedback</em> com vários controles (imaginei na hora, mas são operações bem simples), e um embaralhamento de espectro com algum <em>Phase Vocoder</em>. Por último em reverb p criar um espaço.</p>
+  <time class="post post-footer" datetime="2016-01-28T17:22:44-02:00">Jan 28, 2016</time>
+  <div class="post"><p>Hoje resolvi adiantar uns códigos perdidos por aí. Aí vai o resultado de uma pequena improvisação que fiz ontem (lógico, a improvisação requer que o improvisador mexa no código. Primeiro começa com a captura de audio do laptop pelo proprio laptop (feedback). Vamos salientar esse <em>feedback</em> com vários controles (imaginei na hora, mas são operações bem simples), e um embaralhamento de espectro com algum <em>Phase Vocoder</em>. Por último em reverb p criar um espaço.</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// Crie um espaço de improvisação</span>
 <span class="nx">s</span><span class="p">.</span><span class="nx">boot</span>
@@ -66,7 +66,7 @@
 <span class="o">~</span><span class="nx">verb</span> <span class="o">=</span> <span class="p">{</span><span class="nx">FreeVerb</span><span class="p">.</span><span class="nx">ar</span><span class="p">([</span><span class="o">~</span><span class="nx">r2</span><span class="p">,</span><span class="o">~</span><span class="nx">r3</span><span class="p">],</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)}</span>
 <span class="o">~</span><span class="nx">verb</span><span class="p">.</span><span class="nx">play</span></code></pre></figure>
 
-
+</div>
 </article>
 <a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
 
