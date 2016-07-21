@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Klee Movimentado</title>
+		<meta name="description" content=""/>
+		<link rel="stylesheet" href="http://localhost:4000/assets/css/styles.css">
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'/>
+		<link href='https://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'/>
+		<link rel="canonical" href="http://localhost:4000//processing/klee-movimentado.html"/>
+		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="http://localhost:4000//feed.xml"/>
+		<link rel="shortcut icon" href="http://localhost:4000//favicon.ico"/>
+		<link rel="apple-touch-icon" href="http://localhost:4000//apple-touch-icon.png"/>
+		<link rel="stylesheet" href="/assets/css/jquery-ui.min.css"/>
+	</head>
+	<body>
+	        <script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery-ui.min.js"></script>
+		<script src="/assets/js/scroll.js"></script>
+		<header class="site-header">
+		
+			<h1>
+				<a class="site-title" href="/" title="Diarios improvisados" rel="home">Diarios improvisados</a>
+			</h1>
+		
+		</header>
+		<div class="content" role="main">
+			</script>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <time class="post-date" datetime="2016-07-20T02:31:17-03:00">Jul 20, 2016</time>
+    <h1 class="post-title">Klee Movimentado</h1>
+  </header>
+  <link rel="stylesheet" href="/assets/css/prism.css" type="text/css" />
+<script src="/assets/js/processing.min.js"></script>
+<script language="javascript" type="text/javascript" src="/assets/js/p5.dom.min.js"></script>
+<script src="/assets/js/render.js"></script>
+
+<p>Modifiquei algumas coisas no post <a href="/processing/klee-exerccios-2.html">anterior</a>, para tornar o código um pouco mais complexo e bonito. A idéia é, ao invés de usar valores randômicos que estejam desconectados, os valores randômicos estarão conectados temporalmente.</p>
+
+<div class="example" id="Bezier_movimentados">Bezier_movimentados<pre><code class="language-javascript">
+
+function Mbezier(p){
+	this.points = {x:{val:[],offset:[]},y:{val:[],offset:[]}}
+	this.colors = {r:{val:0,offset:0},g:{val:0,offset:0},b:{val:0,offset:0},a:{val:0,offset:0}}
+}
+
+var n = 100;
+var o = [];
+var text;
+
+function setup(){
+	createCanvas(480, 360);
+	for(var i=n-1;i&gt;=0; i--){
+		o[i] = new Mbezier(this);
+		for(var j=3;j&gt;=0; j--){
+			o[i].points.x.offset[j] = Math.random();
+			o[i].points.y.offset[j] = Math.random();
+			o[i].points.x.val[j] = noise(o[i].points.x.offset[j]) * width;
+			o[i].points.y.val[j] = noise(o[i].points.y.offset[j]) * height;
+			o[i].colors.r.offset = Math.random();
+			o[i].colors.g.offset = Math.random();
+			o[i].colors.b.offset = Math.random();
+			o[i].colors.a.offset = Math.random();
+			o[i].colors.r.val = noise(o[i].colors.r.offset) * 255;
+			o[i].colors.g.val = noise(o[i].colors.g.offset) * 255;
+			o[i].colors.b.val = noise(o[i].colors.b.offset) * 255;
+			o[i].colors.a.val = noise(o[i].colors.a.offset) * 255;
+			
+		}
+	}
+}
+
+function draw(){
+	background(0);
+	for(var i=o.length-1;i&gt;=0; i--){
+		stroke(o[i].colors.r.val,
+			o[i].colors.g.val,
+			o[i].colors.b.val);
+		noFill()
+		bezier(o[i].points.x.val[0],
+			o[i].points.y.val[0],
+			o[i].points.x.val[1],
+			o[i].points.y.val[1],
+			o[i].points.x.val[2],
+			o[i].points.y.val[2],
+			o[i].points.x.val[3],
+			o[i].points.y.val[3]);
+		for(var j=3;j&gt;=0; j--){
+			o[i].points.x.offset[j] += 0.001
+			o[i].points.y.offset[j] += 0.001
+			o[i].points.x.val[j] = noise(o[i].points.x.offset[j]) * width;
+			o[i].points.y.val[j] = noise(o[i].points.y.offset[j]) * height;
+			o[i].colors.r.offset += 0.001;
+			o[i].colors.g.offset += 0.001;
+			o[i].colors.b.offset += 0.001;
+			o[i].colors.a.offset += 0.001;
+			o[i].colors.r.val = noise(o[i].colors.r.offset) * 255;
+			o[i].colors.g.val = noise(o[i].colors.g.offset) * 255;
+			o[i].colors.b.val = noise(o[i].colors.b.offset) * 255;
+			o[i].colors.a.val = noise(o[i].colors.a.offset) * 255;
+		}
+	}
+}
+
+</code></pre></div>
+
+<p>Isto é, o que aparece em um dado <em>frame</em>, depende do <em>frame</em> anterior. Para isso usei a função <a href="http://p5js.org/reference/#/p5/noise"><code class="highlighter-rouge">noise</code></a>. Esta função gera um <a href="https://en.wikipedia.org/wiki/Perlin_noise">Perlin Noise</a>, ou um ruído procedural.</p>
+
+<p>O efeito disso é uma imagem que se movimenta aos poucos, e cujas cores mudam gradualmente.</p>
+
+</article>
+<a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
+
+
+		</div>
+		
+		<footer class="site-footer">
+			<small class="copyright">Theme by: oneohthree (some modifications by jahpd)</small>
+		</footer>
+		<script src="/assets/js/app.js"></script>
+	</body>
+</html>
