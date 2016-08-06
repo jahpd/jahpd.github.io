@@ -1,137 +1,100 @@
-var contextClass = (window.AudioContext || window.webkitAudioContext)
-
 /*
-  @bufferSize
-  @channels
-*/
+ * WavepotRuntime
+ * @param o 
+ * Receives an object with a context, bufferSize and number of channels.
+ * It's possible to add the option 'oneliner' === true | false to
+ * bytebeat operations
+ */
 function WavepotRuntime(o){
-    this.code = ""
+    // this cache context
+    this.config = o;
     this.scope = new Object();
-    this.time = 0;
-    this.context = new contextClass();
     this.playing = false;
-    this.bufferSize = o.bufferSize || 1024;
-    this.channels = o.channels || 2
-    this.scriptnode = this.context.createScriptProcessor(this.bufferSize, 0, this.channels);
-    this.recording = false;
-    var _this = this;
-    this.scriptnode.onaudioprocess = function(e) {
-	
-	// Sistema estereofonico de 2 canais
-	var out = [
-            e.outputBuffer.getChannelData(0),
-            e.outputBuffer.getChannelData(1)
-        ];
-        
-	// Tempo discretizado
-	var f = 0, t = 0, td = 1.0 / _this.context.sampleRate;
-        
-	// A cada janela temporal, o valor numerico
-	// de amplitude vai ser atualizado
-	if (_this.scope && _this.scope.dsp && _this.playing) {
-            t = _this.time;
-	    _this.scope.set_controls(_this.controls);
-	    var i = 0;
-            for (var i = 0; i < out[0].length; i++) {
-		// Ajusta o relógio
-		// Tempo atual e tempo diferencial
-		// Este último será útil para filtros
-		_this.scope.set_time(t, td);
+    this.node = o.context.createScriptProcessor(o.bufferSize, 0, 2);
+    var that = this
+    this.node.onaudioprocess = function(e){
+	// Our synth output
+	var out = [e.outputBuffer.getChannelData(0), e.outputBuffer.getChannelData(1)];
 
-		// função definida dinamicamente
-		f = _this.scope.dsp();
+	// decrement is faster than increment
+	var l = out[0].length - 1;
+	var i = l;
+	var result = 0;
+	if(that.scope && that.scope.dsp && that.playing){
+	    for (; i >= 0; i--) {
+		result = that.scope.dsp();
 
-		// Se a funcao retornar um número
-		// utilizar ele nos dois canais
-		// Se a funcao retornar um Array
-		// de dois valores, separar nos canais
-		if(typeof(f) === 'number'){
-                    out[0][i] =  f
-                    out[1][i] =  f
+		// A liitle option to bytebeat
+		if(that.config.oneliner){
+		    result %= that.config.context.sampleRate/4 | 32;
+		    result /= that.config.context.sampleRate/2 | 64;
 		}
-		else if (typeof(f) === 'object'){
-                    out[0][i] =  f[0]
-                    out[1][i] =  f[1]
-		}
-		// Incrementar o tempo
-		t += td;
-            }
-	    _this.time = t;
+		// now, we have to mirror sample if
+		// we not want phase changes
+		// Choose from an array result (stereo)
+		// or make a stereo from the mono result
+		out[0][l-i] = result[0] | result;
+		out[1][l-i] = result[1] | result;
+		that.scope.update();
+	    }
 	    
-            // Continuar o processamento se nada for atualizado
 	} else {
-            for (var i = 0; i < out[0].length; i++) {
-		out[0][i] = f[0] | f
-		out[1][i] = f[1] | f
+            for (; i >= 0; i--) {
+		out[0][l-i] = result[0] | result;
+		out[1][l-i] = result[1] | result;
             }
 	}
     }
 }
 
-var makeScope = function(code, ctx){
-    // AMBIENTE DE ÁUDIO INTERNO
-    var newscope = new Object();
-    var _code = "var sampleRate = "+ctx.sampleRate+";\n\n"+
-	"var t = 0;\n\n"+
-	"var td = 0;\n\n"+
-	"var tau = 2 * Math.PI\n\n;"+
-	"var bpm = 60;\n\n"+
-	"var controls = {};\n\n"+
-	"var sin = function(f, a) { return a * Math.sin(tau * f * t);};\n\n"+
-	"var saw = function(f, a) { return (1 - 2 * tmod(f, t)) * a; };\n\n"+
-	"var tmod = function(f, t) { return t % (1 / f) * f; };\n\n" +
-	"var tri = function(f, a) { return ttri(f, t) * a; };\n\n" +
-	"var ttri = function(f, t) { return Math.abs(1 - (2 * t * f) % 2 * 2 - 1); };\n\n" +
-	"var pulse = function(f, a, w) { return ((t * f % 1 / f < 1 / f / 2 * w) * 2 - 1) * a; };\n\n" +
-	"this.set_time = function(time, diferencialTime){ t = time; td = diferencialTime};\n\n" +
-	"this.set_controls = function(c){ controls = c};\n\n"+ 
-	"this.dsp = "+code+";"
-    var fn = new Function(_code)
-    fn.call(newscope)
-    if (typeof(newscope.dsp) == 'function') {
-	return newscope;
+function parse(code){
+    var text = code.split("\n");
+    var l = text.length - 1;
+    var i = l
+    for(; i>=0; i--){
+	text[i] = text[i].replace(/\&gt;/, ">");
+	text[i] = text[i].replace(/<code><code\/>/, "");
     }
-    else{
-	return new Error("No given dsp function");
-    }
-	
+    return text.join("\n");
 }
+
 
 WavepotRuntime.prototype.compile = function(code) {
-    // console.log('WavepotRuntime: compile', code);
-    this.code = code;
-    try {
-	this.scope = makeScope(code, this.context);
-	console.log('WavepotRuntime: compiled', newscope);
-	return true;
-    } catch(e) {
-	console.log('WavepotRuntime: ERROR', e.stack.toString());
-        return false;
-    }
-    
+    code = parse(code);
+    code = code.split("function dsp(){");
+    code = [
+	"var sampleRate = "+this.config.context.sampleRate+";",
+	"var t = 0;",
+	"var dt = "+(this.config.ratio | 1.0)+"/sampleRate",
+	"var tau = 2 * Math.PI;",
+	"var bpm = 60;",
+	"var controls = {};",
+	"var sin = function(f, a, _t) { return a * Math.sin(tau * f * (_t!==undefined?t+_t:t));};",
+	"var saw = function(f, a, _t) { return (1 - 2 * tmod(f, (_t!==undefined?t+_t:t))) * a; };",
+	"var tmod = function(f, _t) { return (_t!==undefined?t+_t:t) % (1 / f) * f; };" ,
+	"var tri = function(f, a, _t) { return ttri(f, (_t!==undefined?t+_t:t)) * a; };" ,
+	"var ttri = function(f, _t) { return Math.abs(1 - (2 * (_t!==undefined?t+_t:t) * f) % 2 * 2 - 1); };",
+	//"this.set_time = function(_t){ t =_t;};",
+	"this.reset = function(){ t=0;};",
+	"this.update = function(){ t += dt; };",
+	code[0],
+	"this.dsp = function(){ ",
+	code[1]
+    ].join("\n");
+    var newscope = new Object();
+    var fn = new Function(code);
+    fn.apply(newscope)
+    this.scope = newscope;
+    return (this.scope.dsp && typeof(this.scope.dsp) === 'function');
 }
 
-WavepotRuntime.prototype.play = function(){
-    console.log('WavepotRuntime: play');
-    this.scriptnode.connect(this.context.destination);
+WavepotRuntime.prototype.play = function(dsp){
+    this.node.connect(this.config.context.destination);
     this.playing = true;
 }
 
 WavepotRuntime.prototype.pause = function() {
-    console.log('WavepotRuntime: pause');
     this.playing = false;
-}
-
-WavepotRuntime.prototype.stop = function() {
-    console.log('WavepotRuntime: stop');
-    this.playing = false;
-    this.time = 0;
-    this.scriptnode.disconnect(this.context.destination);
-}
-
-WavepotRuntime.prototype.reset = function() {
-    console.log('WavepotRuntime: reset');
-    this.time = 0;
 }
 
 window.WavepotRuntime = WavepotRuntime

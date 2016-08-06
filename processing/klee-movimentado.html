@@ -5,10 +5,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>Klee Movimentado</title>
-		<meta name="description" content=""/>
-		<link rel="stylesheet" href="https://jahpd.github.io/assets/css/styles.css">
-		<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'/>
-		<link href='https://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'/>
+		<meta name="description" content="Modifiquei algumas coisas no post anterior. Uma nova idéia é, explorara idéia de “Ruído”, visualizada temporalmente. Antes de tudo, vamos organizar o código."/>
+		<link rel="stylesheet" href="/assets/css/styles.css">
 		<link rel="canonical" href="https://jahpd.github.io//processing/klee-movimentado.html"/>
 		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io//feed.xml"/>
 		<link rel="shortcut icon" href="https://jahpd.github.io//favicon.ico"/>
@@ -16,9 +14,6 @@
 		<link rel="stylesheet" href="/assets/css/jquery-ui.min.css"/>
 	</head>
 	<body>
-	        <script src="/assets/js/jquery.min.js"></script>
-		<script src="/assets/js/jquery-ui.min.js"></script>
-		<script src="/assets/js/scroll.js"></script>
 		<header class="site-header">
 		
 			<h1>
@@ -33,87 +28,136 @@
     <h1 class="post">Klee Movimentado</h1>
   </header>
   <time class="post post-footer" datetime="2016-07-20T02:31:17-03:00">Jul 20, 2016</time>
-  <div class="post"><link rel="stylesheet" href="/assets/css/prism.css" type="text/css" />
-<script src="/assets/js/processing.min.js"></script>
-<script language="javascript" type="text/javascript" src="/assets/js/p5.dom.min.js"></script>
-<script src="/assets/js/render.js"></script>
+  <div class="post"><p>Modifiquei algumas coisas no post <a href="/processing/klee-exerccios-2.html">anterior</a>. Uma nova idéia é, explorara idéia de “Ruído”, visualizada temporalmente. Antes de tudo, vamos organizar o código.</p>
 
-<p>Modifiquei algumas coisas no post <a href="/processing/klee-exerccios-2.html">anterior</a>. Uma nova idéia é, explorara idéia de “Ruído”, visualizada temporalmente. Antes de tudo, vamos organizar o código.</p>
+<div class="p5">
+  <div id="8414c7c4f042a9a30156e7173a71c17b">
+    <canvas></canvas>
+  </div>
+  <script type="text/javascript" charset="utf8">
+(function() {
+  var _s, i, len, ref, results, script, src;
+  ref = ['processing.min.js', 'coffee-script.js'];
+  results = [];
+  var _p5 = document.getElementsByClassName('p5')[0]
+  for (i = 0, len = ref.length; i < len; i++) {
+    src = ref[i];
+    script = document.querySelectorAll("[src='" + src + "']");
+    if (script.length === 0) {
+      _s = document.createElement('script');
+      _p5.appendChild(_s);
+      results.push(_s.setAttribute('src', '/assets/js/'+src));
+    } else {
+      results.push(void 0);
+    }
+  }
+  window.instances
+  return results;
+})();</script>
+  <script src="https://gist.github.com/jahpd/8414c7c4f042a9a30156e7173a71c17b.js"></script>
+  <script type="text/javascript" charset="utf8">
+window.addEventListener("DOMContentLoaded", function() {
+  sketch = function(p) {
+    var log;
+    p.preload = function(){
+      log = p.loadFont('/assets/fonts/Blockletter.otf')
 
-<div class="example" id="Bezier_pseudorandomicos">Bezier_pseudorandomicos<pre><code class="language-javascript">
-/*
- * Posições e cores randômicas
- *
- */
+    }
 
-// Criamos uma classe para
-// organização das cordenadas e cores
-function Mbezier(p){
-	this.points = {x:{val:[]},y:{val:[]}}
-	this.colors = {r:{val:0},g:{val:0},b:{val:0},a:{val:0}}
-}
+      var Mbezier, n, o;    
+    
+    Mbezier = (function() {    
+      function Mbezier() {    
+        this['points'] = {    
+          x: {    
+            val: []    
+          },    
+          y: {    
+            val: []    
+          }    
+        };    
+        this['colors'] = {    
+          r: {    
+            val: 0    
+          },    
+          g: {    
+            val: 0    
+          },    
+          b: {    
+            val: 0    
+          },    
+          a: {    
+            val: 0    
+          }    
+        };    
+      }    
+    
+      return Mbezier;    
+    
+    })();    
+    
+    n = 100;    
+    
+    o = [];    
+    
+    p.setup = function() {    
+      var color, i, j, k, l, len, len1, m, point, q, ref, ref1, ref2, results;    
+      p.createCanvas(480, 360);    
+      results = [];    
+      for (i = k = 0, ref = n - 1; 0 <= ref ? k <= ref : k >= ref; i = 0 <= ref ? ++k : --k) {    
+        o[i] = new Mbezier();    
+        ref1 = o[i].colors;    
+        for (l = 0, len = ref1.length; l < len; l++) {    
+          color = ref1[l];    
+          color.val = Math.random() * 255;    
+        }    
+        ref2 = o[i].points;    
+        for (m = 0, len1 = ref2.length; m < len1; m++) {    
+          point = ref2[m];    
+          for (j = q = 0; q <= 2; j = ++q) {    
+            point.val = Math.random() * p.width;    
+          }    
+        }    
+        p.stroke(o[i].colors.r.val, o[i].colors.g.val, o[i].colors.b.val, o[i].colors.a.val);    
+        p.noFill();    
+        results.push(p.bezier(o[i].points.x.val[0], o[i].points.y.val[0], o[i].points.x.val[1], o[i].points.y.val[1], o[i].points.x.val[2], o[i].points.y.val[2], o[i].points.x.val[3], o[i].points.y.val[3]));    
+      }    
+      return results;    
+    };    
+    
+    p.draw = function() {    
+      var c, i, k, l, len, len1, oo, ref, results;    
+      p.background(0);    
+      results = [];    
+      for (k = 0, len = o.length; k < len; k++) {    
+        oo = o[k];    
+        p.stroke(oo.colors.r.val, oo.colors.g.val, oo.colors.b.val, oo.colors.a.val);    
+        p.noFill();    
+        p.bezier(oo.points.x.val[0], oo.points.y.val[0], oo.points.x.val[1], oo.points.y.val[1], oo.points.x.val[2], oo.points.y.val[2], oo.points.x.val[3], oo.points.y.val[3]);    
+        ref = oo.colors;    
+        for (l = 0, len1 = ref.length; l < len1; l++) {    
+          c = ref[l];    
+          c.val = Math.random() * 255;    
+        }    
+        results.push((function() {    
+          var m, results1;    
+          results1 = [];    
+          for (i = m = 0; m <= 2; i = ++m) {    
+            oo.points.x.val[i] = Math.random() * p.width;    
+            results1.push(oo.points.y.val[i] = Math.random() * p.height);    
+          }    
+          return results1;    
+        })());    
+      }    
+      return results;    
+    };    
+    
+  } 
+  runnable = new window.p5(sketch, "8414c7c4f042a9a30156e7173a71c17b");
+});</script>
+</div>
 
-var n = 100;
-var o = [];
-var text;
-
-function setup(){
-	createCanvas(480, 360);
-	for(var i=n-1;i&gt;=0; i--){
-		o[i] = new Mbezier(this);
-		o[i].colors.r.val = Math.random() * 255;
-		o[i].colors.g.val = Math.random() * 255;
-		o[i].colors.b.val = Math.random() * 255;
-		o[i].colors.a.val = Math.random() * 255;
-		for(var j=3;j&gt;=0; j--){
-			o[i].points.x.val[j] = Math.random() * width;
-			o[i].points.y.val[j] = Math.random() * height;
-		}
-		stroke(o[i].colors.r.val,
-			o[i].colors.g.val,
-			o[i].colors.b.val);
-		noFill();
-		bezier(o[i].points.x.val[0],
-			o[i].points.y.val[0],
-			o[i].points.x.val[1],
-			o[i].points.y.val[1],
-			o[i].points.x.val[2],
-	   		o[i].points.y.val[2],
-	   		o[i].points.x.val[3],
-	   		o[i].points.y.val[3]);
-	}
-}
-
-function draw(){
-	background(0);
-	for(var i=o.length-1;i&gt;=0; i--){
-		stroke(o[i].colors.r.val,
-			o[i].colors.g.val,
-			o[i].colors.b.val);
-		noFill();
-		bezier(o[i].points.x.val[0],
-			o[i].points.y.val[0],
-			o[i].points.x.val[1],
-			o[i].points.y.val[1],
-			o[i].points.x.val[2],
-			o[i].points.y.val[2],
-			o[i].points.x.val[3],
-			o[i].points.y.val[3]);
-		o[i].colors.r.val = Math.random() * 255;
-		o[i].colors.g.val = Math.random() * 255;
-		o[i].colors.b.val = Math.random() * 255;
-		o[i].colors.a.val = Math.random() * 255;
-		for(var j=3;j&gt;=0; j--){
-			o[i].points.x.val[j] = Math.random() * width;
-			o[i].points.y.val[j] = Math.random() * height;
-		}
-	}
-}
-
-</code></pre></div>
-<p>.</p>
-
-<p>Como é possível ver, não fica tão bacana as curvas “pularem”. É interessante criar um trajeto do todo. Em outro <a href="">post</a> solucionamos isso;</p>
+<p>De um ponto de vista normativo, as curvas pulam demais a cada <em>frame</em>. Talvez isso funcione se quisermos explorar texturas mais ruidosas. De outra forma, é interessante criar um trajeto fluído. Em outro <a href="">post</a> solucionamos isso.</p>
 </div>
 </article>
 <a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
@@ -124,6 +168,8 @@ function draw(){
 		<footer class="site-footer">
 			<small class="copyright">Theme by: oneohthree (some modifications by jahpd)</small>
 		</footer>
-		<script src="/assets/js/app.js"></script>
+		<!-- <script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery-ui.min.js"></script> -->
+		<script src="/assets/js/scroll.js"></script>
 	</body>
 </html>

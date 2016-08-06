@@ -5,10 +5,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>Klee Exercícios (2)</title>
-		<meta name="description" content=""/>
-		<link rel="stylesheet" href="https://jahpd.github.io/assets/css/styles.css">
-		<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'/>
-		<link href='https://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'/>
+		<meta name="description" content="Acabei de atualizar alguns plugins para Jekyll. Pode ser bastante útil para escrever sketchs processing, partituras através do VexFlow e outras coisas em blo..."/>
+		<link rel="stylesheet" href="/assets/css/styles.css">
 		<link rel="canonical" href="https://jahpd.github.io//processing/klee-exerccios-2.html"/>
 		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io//feed.xml"/>
 		<link rel="shortcut icon" href="https://jahpd.github.io//favicon.ico"/>
@@ -16,9 +14,6 @@
 		<link rel="stylesheet" href="/assets/css/jquery-ui.min.css"/>
 	</head>
 	<body>
-	        <script src="/assets/js/jquery.min.js"></script>
-		<script src="/assets/js/jquery-ui.min.js"></script>
-		<script src="/assets/js/scroll.js"></script>
 		<header class="site-header">
 		
 			<h1>
@@ -33,40 +28,96 @@
     <h1 class="post">Klee Exercícios (2)</h1>
   </header>
   <time class="post post-footer" datetime="2016-02-02T19:12:39-02:00">Feb 02, 2016</time>
-  <div class="post"><link rel="stylesheet" href="/assets/css/prism.css" type="text/css" />
-<script src="/assets/js/processing.min.js"></script>
-<script language="javascript" type="text/javascript" src="/assets/js/p5.dom.min.js"></script>
-<script src="/assets/js/render.js"></script>
-
-<p>Acabei de atualizar alguns <a href="https://github.com/jahpd/jekyll-plugin-artmedias">plugins</a> para <a href="https://jekyllrb.com">Jekyll</a>. Pode ser bastante útil para escrever <em>sketchs</em> processing, partituras através do VexFlow e outras coisas em blogs (suportados pelo Jekyll, é lógico). Tinha escrito outro <a href="/processing/images/creative%20process/klee-exerccios-1.html">post</a>, mas ele está com alguns problemas (renderiza duas vezes).</p>
+  <div class="post"><p>Acabei de atualizar alguns <a href="https://github.com/jahpd/jekyll-plugin-artmedias">plugins</a> para <a href="https://jekyllrb.com">Jekyll</a>. Pode ser bastante útil para escrever <em>sketchs</em> processing, partituras através do VexFlow e outras coisas em blogs (suportados pelo Jekyll, é lógico). Tinha escrito outro <a href="/processing/images/creative%20process/klee-exerccios-1.html">post</a>, mas ele está com alguns problemas (renderiza duas vezes).</p>
 
 <p>Enquanto não existir atualizações, jogo um sketch;</p>
 
-<div class="example" id="abstratoum">abstratoum<pre><code class="language-javascript">
-
-
-function _(x){return random(x);}
-function rx(){return _(width);}
-function ry(){return _(height);}
-function rc(){return _(255);}
-function setup(){
-  createCanvas(480, 360);
-  frameRate(0.5);
-}
-function draw(){ 
-  background(0);
-  var i, r,g,b,x,y;
-  var _r,_g,_b,_x,_y;
-  for(i=0; i &lt; 20; i++) {
-    r = rc(); g = rc(); b = rc();
-    x = rx(); y = ry();
-    stroke(max(_r||0,r),max(_g||0,g),max(_b||0,b), rc());
-    fill(0, 0, 0, rc());
-    bezier(x,y,rx(),ry(),rx(),ry(),_x||width/2,_y||height/2);
-    _x = x; _y = y; _r = r; _g = g; _b = b;
+<div class="p5">
+  <div id="f09b00cd253a3283a5edc423a27c1a3d">
+    <canvas></canvas>
+  </div>
+  <script type="text/javascript" charset="utf8">
+(function() {
+  var _s, i, len, ref, results, script, src;
+  ref = ['processing.min.js', 'coffee-script.js'];
+  results = [];
+  var _p5 = document.getElementsByClassName('p5')[0]
+  for (i = 0, len = ref.length; i < len; i++) {
+    src = ref[i];
+    script = document.querySelectorAll("[src='" + src + "']");
+    if (script.length === 0) {
+      _s = document.createElement('script');
+      _p5.appendChild(_s);
+      results.push(_s.setAttribute('src', '/assets/js/'+src));
+    } else {
+      results.push(void 0);
+    }
   }
-}
-</code></pre></div>
+  window.instances
+  return results;
+})();</script>
+  <script src="https://gist.github.com/jahpd/f09b00cd253a3283a5edc423a27c1a3d.js"></script>
+  <script type="text/javascript" charset="utf8">
+window.addEventListener("DOMContentLoaded", function() {
+  sketch = function(p) {
+    var log;
+    p.preload = function(){
+      log = p.loadFont('/assets/fonts/Blockletter.otf')
+
+    }
+
+      var _pos;    
+    
+    _pos = [];    
+    
+    p.setup = function() {    
+      var i;    
+      p.createCanvas(480, 360);    
+      p.frameRate(0.5);    
+      return _pos = (function() {    
+        var j, len, ref, results;    
+        if (i === 0) {    
+          return p.random(width);    
+        } else {    
+          ref = [0, 1];    
+          results = [];    
+          for (j = 0, len = ref.length; j < len; j++) {    
+            i = ref[j];    
+            results.push(p.random(height));    
+          }    
+          return results;    
+        }    
+      })();    
+    };    
+    
+    p.draw = function() {    
+      var colors, i, j, k, l, len, pos, ref, results;    
+      results = [];    
+      for (i = j = 0; j <= 19; i = ++j) {    
+        for (i = k = 0; k <= 3; i = ++k) {    
+          colors = random(255);    
+        }    
+        ref = [0, 1];    
+        for (l = 0, len = ref.length; l < len; l++) {    
+          i = ref[l];    
+          pos = (i === 0 ? p.random(width) : p.random(height));    
+        }    
+        p.stroke(colors[0], colors[1], colors[2], colors[3]);    
+        p.fill(0, 0, 0, p.random(255));    
+        p.bezier(pos[0], pos[1], p.random(width, p.random(heigth, p.random(width, p.random(heigth, _pos[0], _pos[1])))));    
+        results.push(_pos = pos);    
+      }    
+      return results;    
+    };    
+    
+  } 
+  runnable = new window.p5(sketch, "f09b00cd253a3283a5edc423a27c1a3d");
+});</script>
+</div>
+
+<p><em>EDIT 01-08-2016-</em> Ultimamente, tenho me dedicado a atualizar tais plugins, para incluir a linguagem <a href="http://coffeescript.org/">Coffeescript</a>. A codificação segue os mesmos princípios do processing, de forma que substituimos o padrão <code class="highlighter-rouge">function setup</code> e <code class="highlighter-rouge">function draw</code>, respectivamente, por <code class="highlighter-rouge">@setup</code> e <code class="highlighter-rouge">@draw</code>:</p>
+
+<p><em>EDIT 03-08-2016-</em> Atualizei o plugin para baixar códigos no <a href="https://gist.github.com">gist</a>, com base no <em>plugin</em> <a href="https://github.com/jekyll/jekyll-gist">jekyll-gist</a></p>
 
 </div>
 </article>
@@ -78,6 +129,8 @@ function draw(){
 		<footer class="site-footer">
 			<small class="copyright">Theme by: oneohthree (some modifications by jahpd)</small>
 		</footer>
-		<script src="/assets/js/app.js"></script>
+		<!-- <script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery-ui.min.js"></script> -->
+		<script src="/assets/js/scroll.js"></script>
 	</body>
 </html>

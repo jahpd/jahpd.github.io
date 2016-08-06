@@ -4,10 +4,10 @@
 		<meta charset="utf-8"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>Wavepot (1)</title>
-		<meta name="description" content="Acabei de atualizar alguns plugins para Jekyll. Dessa vez para síntese sonora."/>
+		<title>Wavepot 2</title>
+		<meta name="description" content="Uma simples Sínstese AM estereofônica. Cada valor de frequências e amplitudes são geradas a cada vez que executa-se o play."/>
 		<link rel="stylesheet" href="/assets/css/styles.css">
-		<link rel="canonical" href="https://jahpd.github.io//javascript/sound/wavepot-1.html"/>
+		<link rel="canonical" href="https://jahpd.github.io//wavepot/sound/wavepot-2.html"/>
 		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io//feed.xml"/>
 		<link rel="shortcut icon" href="https://jahpd.github.io//favicon.ico"/>
 		<link rel="apple-touch-icon" href="https://jahpd.github.io//apple-touch-icon.png"/>
@@ -25,21 +25,17 @@
 			</script>
 <article class="posts" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post post-title">
-    <h1 class="post">Wavepot (1)</h1>
+    <h1 class="post">Wavepot 2</h1>
   </header>
-  <time class="post post-footer" datetime="2016-02-03T19:11:37-02:00">Feb 03, 2016</time>
-  <div class="post"><p>Acabei de atualizar alguns <a href="https://github.com/jahpd/jekyll-plugin-artmedias">plugins</a> para <a href="https://jekyllrb.com">Jekyll</a>. Dessa vez para síntese sonora.</p>
+  <time class="post post-footer" datetime="2016-07-21T20:34:32-03:00">Jul 21, 2016</time>
+  <div class="post"><p>Uma simples Sínstese AM estereofônica. Cada valor de frequências e amplitudes são geradas a cada vez que executa-se o <em>play</em>.</p>
 
-<p>Para testar o plugin de síntese sonora, codifiquei uma função <a href="http://ocw.mit.edu/resources/res-6-008-digital-signal-processing-spring-2011/index.htm">senóide</a>.  Com o indicativo  <em>wavepot</em>, seguido do número de canais, o tamanho do <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioBuffer">buffer</a>, a razão temporal da amostragem – entre um mínimo de tempo entre 1 e a taxa de amostragem e, se o código será de uma linha. Este último é muito útil para criar <a href="http://games.greggman.com/game/html5-bytebeat/">bytebeats</a>.</p>
-
-<p><em>EDIT 03-08-2016</em> Atualizei o plugin wavepot para baixar, do <a href="https://gist.github.com/">gist</a>, o código de processamento de sinais sonoros.</p>
-
-<div class="wavepot" id="f7ebcc2c499d7d64576d2192277b73ef">
+<div class="wavepot" id="374357ba3c952bd2b9cc3ca75ffff0a1">
 <button class="play">play</button>
 <button class="pause">pause</button>
 <button class="reset">reset</button>
 <script src="/assets/js/perlin-noise-simplex.js"></script>
-<script src="https://gist.github.com/jahpd/f7ebcc2c499d7d64576d2192277b73ef.js"></script>
+<script src="https://gist.github.com/jahpd/374357ba3c952bd2b9cc3ca75ffff0a1.js"></script>
 <script type="text/javascript" charset="utf8">var WavepotRuntime;
 
 WavepotRuntime = (function() {
@@ -107,7 +103,7 @@ window.addEventListener("DOMContentLoaded", function() {
     element: document.getElementsByClassName("wavepot")[0],
     ratio: 1.0,
     oneliner: false,
-    environment: new Function("var _perlin, bpm, check_t, dt, perlin1D, perlin2D, perlin3D, sampleRate, saw, sin, sound, t, tau, tmod, tri, ttri, slice = [].slice; sampleRate = " + window.context.sampleRate + "; t = 0; dt = 1 / sampleRate; tau = 2 * Math.PI; bpm = 60; _perlin = new SimplexNoise(); check_t = function(_t) { if (_t !== void 0) { return t + _t; } else { return t; } }; sin = function(f, a, _t) { return a * Math.sin(tau * f * check_t(_t)); }; saw = function(f, a, _t) { return (1 - 2 * tmod(f, _t)) * a; }; tmod = function(f, _t) { return check_t(_t) % (1 / f) * f; }; tri = function(f, a, _t) { return ttri(f, _t) * a; }; ttri = function(f, _t) { return Math.abs(1 - (2 * check_t(_t) * f) % 2 * 2 - 1); }; perlin1D = function() { var a, args, f, wave; wave = arguments[0], f = arguments[1], a = arguments[2], args = 4 <= arguments.length ? slice.call(arguments, 3) : []; return wave(f, a, t + _perlin.noise(args[0], 0)); }; perlin2D = function() { var a, args, f, wave; wave = arguments[0], f = arguments[1], a = arguments[2], args = 4 <= arguments.length ? slice.call(arguments, 3) : []; return wave(f, a, t + _perlin.noise(args[0], args[1])); }; perlin3D = function() { var a, args, f, wave; wave = arguments[0], f = arguments[1], a = arguments[2], args = 4 <= arguments.length ? slice.call(arguments, 3) : []; return wave(f, a, t + _perlin.noise3d(args[0], args[1], args[2])); }; this.reset = function() { return t = 0; }; this.update = function() { return t += dt; }; this.isSetup = false; sound = {}; this.setup = function() { sound.freq = [Math.random() * 22, 22 + Math.random() * 220]; return sound.offset = [Math.random(), Math.random()]; }; this.dsp = function() { var freq, i, j, len, ref, results, s; i = 0; ref = sound.freq; results = []; for (j = 0, len = ref.length; j < len; j++) { freq = ref[j]; s = perlin1D(sin, freq, sin(freq, 0.71), sound.offset[i]); sound.offset[i] += 0.00001; i += 1; results.push(s); } return results; };")
+    environment: new Function("var _perlin, bpm, check_t, dt, max, min, perlin1D, perlin2D, perlin3D, sampleRate, saw, senos, sin, t, tau, tmod, tri, ttri, slice = [].slice; sampleRate = " + window.context.sampleRate + "; t = 0; dt = 1 / sampleRate; tau = 2 * Math.PI; bpm = 60; _perlin = new SimplexNoise(); check_t = function(_t) { if (_t !== void 0) { return t + _t; } else { return t; } }; sin = function(f, a, _t) { return a * Math.sin(tau * f * check_t(_t)); }; saw = function(f, a, _t) { return (1 - 2 * tmod(f, _t)) * a; }; tmod = function(f, _t) { return check_t(_t) % (1 / f) * f; }; tri = function(f, a, _t) { return ttri(f, _t) * a; }; ttri = function(f, _t) { return Math.abs(1 - (2 * check_t(_t) * f) % 2 * 2 - 1); }; perlin1D = function() { var a, args, f, wave; wave = arguments[0], f = arguments[1], a = arguments[2], args = 4 <= arguments.length ? slice.call(arguments, 3) : []; return wave(f, a, t + _perlin.noise(args[0], 0)); }; perlin2D = function() { var a, args, f, wave; wave = arguments[0], f = arguments[1], a = arguments[2], args = 4 <= arguments.length ? slice.call(arguments, 3) : []; return wave(f, a, t + _perlin.noise(args[0], args[1])); }; perlin3D = function() { var a, args, f, wave; wave = arguments[0], f = arguments[1], a = arguments[2], args = 4 <= arguments.length ? slice.call(arguments, 3) : []; return wave(f, a, t + _perlin.noise3d(args[0], args[1], args[2])); }; this.reset = function() { return t = 0; }; this.update = function() { return t += dt; }; this.isSetup = false; max = 880; min = 16; senos = []; this.setup = function() { var i, j, results; results = []; for (i = j = 0; j <= 3; i = ++j) { results.push(senos.push({ c: min + (Math.random() * max), a: Math.random(), m: Math.random() * 1000 })); } return results; }; this.dsp = function() { var l, modL, modR, r; modL = sin(senos[1].m, senos[1].a); modR = sin(senos[3].m, senos[3].a); l = sin(senos[0].c, modL); r = sin(senos[2].c, modR); return [l * tri(0.01, 0.71 / 2), r * tri(0.011, 0.71 / 2)]; };")
   });
 });
 </script>

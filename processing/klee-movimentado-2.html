@@ -5,10 +5,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>Klee Movimentado (2)</title>
-		<meta name="description" content=""/>
-		<link rel="stylesheet" href="https://jahpd.github.io/assets/css/styles.css">
-		<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic' rel='stylesheet' type='text/css'/>
-		<link href='https://fonts.googleapis.com/css?family=Sanchez:400,400italic' rel='stylesheet' type='text/css'/>
+		<meta name="description" content="Neste post, vamos deixar o post anterior mais fluido."/>
+		<link rel="stylesheet" href="/assets/css/styles.css">
 		<link rel="canonical" href="https://jahpd.github.io//processing/klee-movimentado-2.html"/>
 		<link rel="alternate" type="application/rss+xml" title="Diarios improvisados" href="https://jahpd.github.io//feed.xml"/>
 		<link rel="shortcut icon" href="https://jahpd.github.io//favicon.ico"/>
@@ -16,9 +14,6 @@
 		<link rel="stylesheet" href="/assets/css/jquery-ui.min.css"/>
 	</head>
 	<body>
-	        <script src="/assets/js/jquery.min.js"></script>
-		<script src="/assets/js/jquery-ui.min.js"></script>
-		<script src="/assets/js/scroll.js"></script>
 		<header class="site-header">
 		
 			<h1>
@@ -33,73 +28,57 @@
     <h1 class="post">Klee Movimentado (2)</h1>
   </header>
   <time class="post post-footer" datetime="2016-07-21T18:15:05-03:00">Jul 21, 2016</time>
-  <div class="post"><link rel="stylesheet" href="/assets/css/prism.css" type="text/css" />
-<script src="/assets/js/processing.min.js"></script>
-<script language="javascript" type="text/javascript" src="/assets/js/p5.dom.min.js"></script>
-<script src="/assets/js/render.js"></script>
-
-<p>Neste post, vamos deixar o <a href="">post anterior</a> mais fluido.</p>
+  <div class="post"><p>Neste post, vamos deixar o <a href="">post anterior</a> mais fluido.</p>
 
 <p>Isto é, o que aparece em um dado <em>frame</em>, depende do <em>frame</em> anterior. Para isso usei a função <a href="http://p5js.org/reference/#/p5/noise"><code class="highlighter-rouge">noise</code></a>. Esta função gera um <a href="https://en.wikipedia.org/wiki/Perlin_noise">Perlin Noise</a>, ou um ruído procedural.</p>
 
-<div class="example" id="Bezier_fluido_linear">Bezier_fluido_linear<pre><code class="language-javascript">
+<div class="p5">
+  <div id="f72c7b70d38113b3ac4a77d43eb42438">
+    <canvas></canvas>
+  </div>
+  <script type="text/javascript" charset="utf8">
+(function() {
+  var _s, i, len, ref, results, script, src;
+  ref = ['processing.min.js', 'coffee-script.js'];
+  results = [];
+  var _p5 = document.getElementsByClassName('p5')[0]
+  for (i = 0, len = ref.length; i < len; i++) {
+    src = ref[i];
+    script = document.querySelectorAll("[src='" + src + "']");
+    if (script.length === 0) {
+      _s = document.createElement('script');
+      _p5.appendChild(_s);
+      results.push(_s.setAttribute('src', '/assets/js/'+src));
+    } else {
+      results.push(void 0);
+    }
+  }
+  window.instances
+  return results;
+})();</script>
+  <script src="https://gist.github.com/jahpd/f72c7b70d38113b3ac4a77d43eb42438.js"></script>
+  <script type="text/javascript" charset="utf8">
+window.addEventListener("DOMContentLoaded", function() {
+  sketch = function(p) {
+    var log;
+    p.preload = function(){
+      log = p.loadFont('/assets/fonts/Blockletter.otf')
 
-function Mbezier(p){
-	this.points = {x:{val:[],offset:[]},y:{val:[],offset:[]}}
-	this.colors = {r:{val:0,offset:0},g:{val:0,offset:0},b:{val:0,offset:0},a:{val:0,offset:0}}
-}
+    }
 
-var o = new Array(13);
+    p.setup = function(){
+      p.createCanvas(480,360);
+      p.background(0);
+      p.fill('#ED225D');
+      p.textFont(log);
+      p.textSize(20);
+      p.text("Gist Compilation Error:\n SyntaxError: [stdin]:35:76: unmatched OUTDENT", 10, 20);
+    }
+  }
+  runnable = new window.p5(sketch, "f72c7b70d38113b3ac4a77d43eb42438");
+});</script>
+</div>
 
-function setup(){
-	createCanvas(480, 360);
-	for(var i=o.length;i&gt;=0; i--){
-		o[i] = new Mbezier(this);
-		for(var j=3;j&gt;=0; j--){
-			o[i].points.x.offset[j] = Math.random();
-			o[i].points.y.offset[j] = Math.random();
-			o[i].points.x.val[j] = Math.random() * width;
-			o[i].points.y.val[j] = Math.random() * height;
-		}
-		o[i].colors.r.offset = Math.random();
-		o[i].colors.g.offset = Math.random();
-		o[i].colors.b.offset = Math.random();
-		o[i].colors.a.offset = Math.random();
-	}
-}
-
-function draw(){
-	background(0);
-	for(var i=o.length-1;i&gt;=0; i--){
-		stroke(o[i].colors.r.val,
-			o[i].colors.g.val,
-			o[i].colors.b.val);
-		noFill()
-		bezier(o[i].points.x.val[0],
-			o[i].points.y.val[0],
-			o[i].points.x.val[1],
-			o[i].points.y.val[1],
-			o[i].points.x.val[2],
-			o[i].points.y.val[2],
-			o[i].points.x.val[3],
-			o[i].points.y.val[3]);
-		for(var j=3;j&gt;=0; j--){
-			o[i].points.x.offset[j] += 0.001
-			o[i].points.y.offset[j] += 0.001
-			o[i].points.x.val[j] = (2 * Math.sin(noise(o[i].points.x.offset[j]) * Math.PI) - 1) * width;
-			o[i].points.y.val[j] = (2 * Math.sin(noise(o[i].points.y.offset[j]) * Math.PI) - 1) * height;
-		}
-		o[i].colors.r.offset += 0.001;
-		o[i].colors.g.offset += 0.001;
-		o[i].colors.b.offset += 0.001;
-		o[i].colors.a.offset += 0.001;
-		o[i].colors.r.val = noise(o[i].colors.r.offset) * 255;
-		o[i].colors.g.val = noise(o[i].colors.g.offset) * 255;
-		o[i].colors.b.val = noise(o[i].colors.b.offset) * 255;
-		o[i].colors.a.val = noise(o[i].colors.a.offset) * 255;
-	}
-}
-</code></pre></div>
 </div>
 </article>
 <a id="go-top" href="#" onclick="scrollToTop();return false">&uarr;</a>
@@ -110,6 +89,8 @@ function draw(){
 		<footer class="site-footer">
 			<small class="copyright">Theme by: oneohthree (some modifications by jahpd)</small>
 		</footer>
-		<script src="/assets/js/app.js"></script>
+		<!-- <script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery-ui.min.js"></script> -->
+		<script src="/assets/js/scroll.js"></script>
 	</body>
 </html>
